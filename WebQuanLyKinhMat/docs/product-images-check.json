@@ -1,0 +1,105 @@
+{
+  "recordedAt": "2026-10-20T01:20:33.695671+07:00",
+  "sourceArchive": "picture.zip",
+  "originalImagesUnmodified": true,
+  "sqlSeed": {
+    "updatedImagePaths": 8,
+    "allOtherSeedValuesUnchanged": true
+  },
+  "existingWebDatabase": {
+    "name": "QuanLyKinhMatWeb",
+    "updatedImagePaths": 8,
+    "allOtherProductValuesUnchanged": true
+  },
+  "sourceBuild": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "ui": {
+    "products": {
+      "imagesLoaded": 8,
+      "placeholderIcons": 0,
+      "correctProductMapping": true
+    },
+    "sale": {
+      "imagesLoaded": 8,
+      "placeholderIcons": 0
+    },
+    "import": {
+      "imagesLoaded": 8,
+      "placeholderIcons": 0
+    },
+    "browserErrors": [],
+    "viewport": {
+      "height": 720,
+      "width": 1280
+    },
+    "pageOverflow": false
+  },
+  "images": [
+    {
+      "productId": 1,
+      "name": "Gọng kính RB Classic",
+      "url": "/images/products/sp001-rb-classic.jpg",
+      "sha256": "0e8373b685f10912f1e6a17140498c2b8c89f353783f4543f026b4b7287184f4",
+      "width": 440,
+      "height": 220
+    },
+    {
+      "productId": 2,
+      "name": "Kính râm Ray-Ban Aviator",
+      "url": "/images/products/sp002-ray-ban-aviator.jpg",
+      "sha256": "2990f2c5a0eddecd60f249ba56f3a0aa2d7c92835d517a6936bbe0fb878ef791",
+      "width": 220,
+      "height": 220
+    },
+    {
+      "productId": 3,
+      "name": "Gọng Gucci GG01",
+      "url": "/images/products/sp003-gucci-gg01.jpg",
+      "sha256": "bd7e2ffd00bfb0e8754f6b4de49fea00fe7a2ae9b1c8f14208530a59a07ee735",
+      "width": 220,
+      "height": 220
+    },
+    {
+      "productId": 4,
+      "name": "Oakley Sport",
+      "url": "/images/products/sp004-oakley-sport.jpg",
+      "sha256": "0f3b07f671747a669717518e1da9a996e1dbdae6d1079b37215351ad4672795b",
+      "width": 160,
+      "height": 105
+    },
+    {
+      "productId": 5,
+      "name": "Gentle Monster GM01",
+      "url": "/images/products/sp005-gentle-monster-gm01.jpg",
+      "sha256": "e676f7216f0b7bfccca954dbad619a73595a015bab6f997c95150dd26e0ae41b",
+      "width": 220,
+      "height": 220
+    },
+    {
+      "productId": 6,
+      "name": "Tròng kính Essilor 1.56",
+      "url": "/images/products/sp006-essilor-156.jpg",
+      "sha256": "7ac4e53de80f08dc5f3fbabcf9a705a143ccce99525dea4b7868c9ecc1313399",
+      "width": 220,
+      "height": 220
+    },
+    {
+      "productId": 7,
+      "name": "Gọng kính Basic 01",
+      "url": "/images/products/sp007-basic-01.jpg",
+      "sha256": "ef92f1646b3ecc9918321acd04e2887fc86cf40aaa868c609cb3e04c3a78d37f",
+      "width": 220,
+      "height": 220
+    },
+    {
+      "productId": 8,
+      "name": "Kính cận Classic",
+      "url": "/images/products/sp008-kinh-can-classic.jpg",
+      "sha256": "295f7762a5fae6e729d0a7238fa2b6ee1c3718594ac490afb75080abcd74777b",
+      "width": 440,
+      "height": 220
+    }
+  ]
+}
