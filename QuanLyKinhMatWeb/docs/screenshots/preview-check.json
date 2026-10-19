@@ -1,0 +1,306 @@
+{
+  "createdAt": "2026-10-19T11:51:45.719Z",
+  "errors": [],
+  "widths": [
+    {
+      "viewport": 320,
+      "content": 320
+    },
+    {
+      "viewport": 390,
+      "content": 390
+    },
+    {
+      "viewport": 768,
+      "content": 768
+    },
+    {
+      "viewport": 1440,
+      "content": 1440
+    }
+  ],
+  "layouts": [
+    {
+      "route": "overview",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Tổng quan cửa hàng",
+      "pass": true
+    },
+    {
+      "route": "sale",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Bán hàng",
+      "pass": true
+    },
+    {
+      "route": "import",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Nhập hàng",
+      "pass": true
+    },
+    {
+      "route": "products",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Sản phẩm kính mắt",
+      "pass": true
+    },
+    {
+      "route": "customers",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Khách hàng",
+      "pass": true
+    },
+    {
+      "route": "suppliers",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Nhà cung cấp",
+      "pass": true
+    },
+    {
+      "route": "catalogs",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Danh mục",
+      "pass": true
+    },
+    {
+      "route": "search",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Tìm kiếm & tra cứu",
+      "pass": true
+    },
+    {
+      "route": "reports",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Báo cáo kinh doanh",
+      "pass": true
+    },
+    {
+      "route": "users",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Tài khoản nhân viên",
+      "pass": true
+    },
+    {
+      "route": "overview",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Tổng quan cửa hàng",
+      "pass": true
+    },
+    {
+      "route": "sale",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Bán hàng",
+      "pass": true
+    },
+    {
+      "route": "import",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Nhập hàng",
+      "pass": true
+    },
+    {
+      "route": "products",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Sản phẩm kính mắt",
+      "pass": true
+    },
+    {
+      "route": "customers",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Khách hàng",
+      "pass": true
+    },
+    {
+      "route": "suppliers",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Nhà cung cấp",
+      "pass": true
+    },
+    {
+      "route": "catalogs",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Danh mục",
+      "pass": true
+    },
+    {
+      "route": "search",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Tìm kiếm & tra cứu",
+      "pass": true
+    },
+    {
+      "route": "reports",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Báo cáo kinh doanh",
+      "pass": true
+    },
+    {
+      "route": "users",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Tài khoản nhân viên",
+      "pass": true
+    },
+    {
+      "route": "overview",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Tổng quan cửa hàng",
+      "pass": true
+    },
+    {
+      "route": "sale",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Bán hàng",
+      "pass": true
+    },
+    {
+      "route": "import",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Nhập hàng",
+      "pass": true
+    },
+    {
+      "route": "products",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Sản phẩm kính mắt",
+      "pass": true
+    },
+    {
+      "route": "customers",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Khách hàng",
+      "pass": true
+    },
+    {
+      "route": "suppliers",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Nhà cung cấp",
+      "pass": true
+    },
+    {
+      "route": "catalogs",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Danh mục",
+      "pass": true
+    },
+    {
+      "route": "search",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Tìm kiếm & tra cứu",
+      "pass": true
+    },
+    {
+      "route": "reports",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Báo cáo kinh doanh",
+      "pass": true
+    },
+    {
+      "route": "users",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Tài khoản nhân viên",
+      "pass": true
+    },
+    {
+      "route": "overview",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Tổng quan cửa hàng",
+      "pass": true
+    },
+    {
+      "route": "sale",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Bán hàng",
+      "pass": true
+    },
+    {
+      "route": "import",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Nhập hàng",
+      "pass": true
+    },
+    {
+      "route": "products",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Sản phẩm kính mắt",
+      "pass": true
+    },
+    {
+      "route": "customers",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Khách hàng",
+      "pass": true
+    },
+    {
+      "route": "suppliers",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Nhà cung cấp",
+      "pass": true
+    },
+    {
+      "route": "catalogs",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Danh mục",
+      "pass": true
+    },
+    {
+      "route": "search",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Tìm kiếm & tra cứu",
+      "pass": true
+    },
+    {
+      "route": "reports",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Báo cáo kinh doanh",
+      "pass": true
+    },
+    {
+      "route": "users",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Tài khoản nhân viên",
+      "pass": true
+    }
+  ],
+  "logoutVerified": true,
+  "localizedValidation": true
+}

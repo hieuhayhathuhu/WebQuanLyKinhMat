@@ -1,0 +1,14 @@
+{
+  "products": 8,
+  "customers": 5,
+  "suppliers": 3,
+  "sales": 5,
+  "purchases": 3,
+  "users": 3,
+  "negativeStock": 0,
+  "legacyPasswords": 0,
+  "invalidPasswordHashes": 0,
+  "mismatchedSaleTotals": 0,
+  "capturedAt": "2026-10-19T16:50:42.6492223Z",
+  "database": "QuanLyKinhMatWeb"
+}

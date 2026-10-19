@@ -1,0 +1,1286 @@
+{
+  "recordedAt": "2026-10-19T11:52:12.731797+00:00",
+  "environment": {
+    "browser": "Microsoft Edge",
+    "runtime": "ASP.NET Core 10.0.12",
+    "sdk": "10.0.401",
+    "database": "QuanLyKinhMatWeb",
+    "host": "localhost"
+  },
+  "notes": [
+    "Dữ liệu QA thật được tạo và dọn trong database web riêng.",
+    "Riêng một phản hồi GET /api/sales giả lập được dùng để kiểm tra xuất CSV ngày và số tiền cố định; không tạo hóa đơn SQL cho ca đó.",
+    "Lỗi mạng được mô phỏng bằng abort POST /api/sales trong trình duyệt.",
+    "186 là số kiểm tra duy nhất ở các lượt thành công cuối, không cộng lại những lần chạy lặp.",
+    "Bộ API/nghiệp vụ 55 kiểm tra đã được chạy lại sau khi bỏ demo, đăng nhập bằng mã nhân viên 1. Các bộ khác giữ thời điểm lịch sử đã ghi."
+  ],
+  "suites": [
+    {
+      "name": "API và nghiệp vụ",
+      "sourceFile": "QA1792428679860.json",
+      "completed": true,
+      "passed": 55,
+      "total": 55,
+      "tests": [
+        {
+          "name": "Anonymous API requires login",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Admin login and bootstrap",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Five catalogs loaded from SQL",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Original products loaded",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "CSRF token required for mutations",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Phone without digits rejected",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Customer SQL length enforced",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Catalog create and update",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Product saved to SQL",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Purchase total includes discount",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Purchase updates stock and price",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Stale sale price rejected without stock change",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Sale total and stock correct",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Repeated token returns same invoice once",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Same token with changed payload rejected",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Overselling rejected atomically",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Referenced product cannot be deleted",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Referenced customer cannot be deleted",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Referenced catalog cannot be deleted",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Concurrent duplicate submits subtract stock once",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Sale cancellation restores stock once",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Purchase cancellation restores original stock and price",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Two buyers compete for last unit: exactly one succeeds",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Last-unit concurrency never makes stock negative",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Multi-line transaction rolls back when one product lacks stock",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Cannot cancel purchase when its stock has been consumed",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "User API never exposes password hash",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Last active admin protected",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Staff has separate identity and role",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Staff cannot create products",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Staff cannot view purchases or users",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Invoice employee comes from current authenticated user",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Staff cannot cancel invoices",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Incorrect current password rejected",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Password change keeps current session valid",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Disabling account revokes existing session",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI route overview",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI route sale",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI route import",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI route products",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI route customers",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI route suppliers",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI route catalogs",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI route search",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI route reports",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI route users",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI requires reconfirmation after price changed",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI confirmation refreshes changed price",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Skip link preserves route",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Mobile width overview",
+          "pass": true,
+          "details": "{\"viewport\":390,\"content\":390}"
+        },
+        {
+          "name": "Mobile width products",
+          "pass": true,
+          "details": "{\"viewport\":390,\"content\":390}"
+        },
+        {
+          "name": "Mobile width sale",
+          "pass": true,
+          "details": "{\"viewport\":390,\"content\":390}"
+        },
+        {
+          "name": "Mobile width customers",
+          "pass": true,
+          "details": "{\"viewport\":390,\"content\":390}"
+        },
+        {
+          "name": "Mobile width reports",
+          "pass": true,
+          "details": "{\"viewport\":390,\"content\":390}"
+        },
+        {
+          "name": "No JavaScript errors in exercised UI",
+          "pass": true,
+          "details": ""
+        }
+      ],
+      "recordedAt": "2026-10-19T16:51:19.860Z"
+    },
+    {
+      "name": "Form quản lý và bán hàng",
+      "sourceFile": "QA1792389320125-forms.json",
+      "completed": true,
+      "passed": 29,
+      "total": 29,
+      "tests": [
+        {
+          "name": "Admin form session ready",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI creates categories",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI updates categories",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI deletes unused categories",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI creates brands",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI updates brands",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI deletes unused brands",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Product form prevents missing required values",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI creates product with price and stock",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI updates product and persists values",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI deletes an unused product",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI creates customers",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI updates customers",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI creates suppliers",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI updates suppliers",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI deletes an unused supplier",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Current admin role and active status cannot be changed in form",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI creates staff account",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Form-created staff has no account administration access",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "User name is readonly while editing",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI updates and disables staff account",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI account disable revokes existing staff session",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Cart UI computes quantity and discount before saving",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Invoice confirmation shows selected customer and discounted total",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Invoice UI saves exactly one sale for fixture customer",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Invoice UI subtracts the correct stock",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Invoice detail displays stored line and total",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Invoice cancellation UI restores stock and retains cancelled history",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "No JavaScript errors during form workflows",
+          "pass": true,
+          "details": ""
+        }
+      ]
+    },
+    {
+      "name": "Hồi quy báo cáo",
+      "sourceFile": "ranking-tests.json",
+      "completed": true,
+      "passed": 2,
+      "total": 2,
+      "tests": [
+        {
+          "name": "Different IDs with same name remain separate",
+          "pass": true
+        },
+        {
+          "name": "Renamed product remains one ID group",
+          "pass": true
+        }
+      ]
+    },
+    {
+      "name": "Form nhập hàng và validation",
+      "sourceFile": "QA1792410763914-inventory-extended.json",
+      "completed": true,
+      "passed": 28,
+      "total": 28,
+      "tests": [
+        {
+          "name": "Reject empty product name",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject whitespace product name",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject overlong product name",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject negative sale price",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject negative stock",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject nonexistent category",
+          "pass": true,
+          "details": "409"
+        },
+        {
+          "name": "Reject fractional stock",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject more than two money decimal places",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Invalid product requests do not insert records",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Reject whitespace customer",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Reject invalid customer email",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Reject invalid phone digits",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Reject purchase zero quantity",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject purchase negative quantity",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject purchase quantity 10001",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject purchase empty lines",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject purchase null line",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject purchase duplicate product",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Reject purchase unknown supplier",
+          "pass": true,
+          "details": "404"
+        },
+        {
+          "name": "Reject purchase discount over 100",
+          "pass": true,
+          "details": "400"
+        },
+        {
+          "name": "Invalid purchases are atomic",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Purchase form saves two lines and current employee",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Purchase decimal total matches rounding rules",
+          "pass": true,
+          "details": "906444.79"
+        },
+        {
+          "name": "Purchase form updates each stock",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Multi-line cancellation restores every stock and cost",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Repeated multi-line cancellation has no second stock effect",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Cannot sell inactive product",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "No browser errors in purchase workflows",
+          "pass": true,
+          "details": ""
+        }
+      ]
+    },
+    {
+      "name": "Đăng nhập, phân quyền và CSRF",
+      "sourceFile": "QA1792410578655.json",
+      "completed": true,
+      "passed": 45,
+      "total": 45,
+      "tests": [
+        {
+          "name": "Test target is a local server",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Project configuration targets the separate test copy",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU03 Anonymous home redirects to local login",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU03 Anonymous API requires authentication",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU01 Admin authentication succeeds",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU02 Unknown username rejected without authentication",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU02 Wrong password rejected without authentication",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU02 Unknown user and wrong password use the same message",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU01 QA staff has an independent Staff identity",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU05 Staff cannot POST an Admin account",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU05 Staff cannot PUT its own role to Admin",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU05 Staff cannot PUT another account",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU05 Denied account writes leave users unchanged",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 POST with missing CSRF token rejected",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 POST with missing CSRF leaves customer data unchanged",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 POST with wrong CSRF token rejected",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 POST with wrong CSRF leaves customer data unchanged",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 PUT with missing CSRF token rejected",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 PUT with missing CSRF leaves customer data unchanged",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 PUT with wrong CSRF token rejected",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 PUT with wrong CSRF leaves customer data unchanged",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 DELETE with missing CSRF token rejected",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 DELETE with missing CSRF leaves customer data unchanged",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 DELETE with wrong CSRF token rejected",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC01 DELETE with wrong CSRF leaves customer data unchanged",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU06 Reject wrong current password",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU06 wrong current password leaves the current session valid",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU06 Reject mismatched confirmation",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU06 mismatched confirmation leaves the current session valid",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU06 Reject short new password",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU06 short new password leaves the current session valid",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU07 Other context is authenticated before password change",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU07 Password change keeps the initiating session valid",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU07 Password change revokes the previous cookie in another context",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU07 Old password can no longer authenticate",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU07 New password authenticates the same Staff account",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU04 Logout removes API authentication",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU04 Logout makes home require login again",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU04 Logout does not terminate an independent active session",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU02 Disabling QA account revokes its active session",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "AU02 Disabled user cannot log in with the correct password",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "QA fixture is left disabled for controlled SQL cleanup",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Admin session remains valid and unchanged",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "Seven login POSTs stay below the server rate limit",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "No JavaScript errors during auth checks",
+          "pass": true,
+          "details": ""
+        }
+      ]
+    },
+    {
+      "name": "Tìm kiếm, bàn phím, CSV và lỗi mạng",
+      "sourceFile": "QA1792410590064-ui-extended.json",
+      "completed": true,
+      "passed": 27,
+      "total": 27,
+      "tests": [
+        {
+          "name": "Admin signs in once for the extended UI suite",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "PR04 creates twelve owned Unicode products with no invoices",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "PR04 unaccented lowercase search matches Vietnamese Đ/đ and accents",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "PR04 first page shows eight results and disables previous page",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "PR04 last page has four disjoint results and disables next page",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "PR04 changing search resets pagination to page one",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "PR04 category filter composes with search",
+          "pass": true,
+          "details": "Existing categories: 5"
+        },
+        {
+          "name": "PR04 low filter returns exact fixture set",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "PR04 available filter returns exact fixture set",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "PR04 inactive filter returns exact fixture set",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "PR04 no-result search has an empty state and safe pagination",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC02 HTML-like product name is stored and rendered as literal text",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC02 quotes and markup remain literal inside edit fields",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "SC02 apostrophes, double quotes and SQL source remain ordinary data",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI02 keyboard skip link focuses content and preserves current route",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI02 keyboard opens modal, Escape closes it and restores opener focus",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI02 Enter submits a valid form and persists Vietnamese customer data",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "I1801 product CSV starts with a UTF-8 BOM",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "I1801 CSV preserves Unicode, commas, quotes and fractional prices",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "I1801 CSV download filename uses local YYYY-MM-DD date",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "I1801 invoice CSV preserves date, Vietnamese customer and decimal amount",
+          "pass": true,
+          "details": "Invoice exists only in a mocked GET response, never in SQL Server."
+        },
+        {
+          "name": "UI03 cart is prepared before simulated network failure",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI03 aborted invoice request displays an actionable focused error",
+          "pass": true,
+          "details": "The application presents this error in the modal alert."
+        },
+        {
+          "name": "UI03 failed invoice leaves cart quantity, party and amount intact",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI03 network failure creates no SQL invoice and changes no stock",
+          "pass": true,
+          "details": ""
+        },
+        {
+          "name": "UI03 removing network simulation restores confirmation without losing draft",
+          "pass": true,
+          "details": "The recovered confirmation is closed without submitting an invoice."
+        },
+        {
+          "name": "Extended UI workflows complete with no uncaught browser errors",
+          "pass": true,
+          "details": ""
+        }
+      ]
+    }
+  ],
+  "passed": 186,
+  "total": 186,
+  "layouts": [
+    {
+      "route": "overview",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Tổng quan cửa hàng",
+      "pass": true
+    },
+    {
+      "route": "sale",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Bán hàng",
+      "pass": true
+    },
+    {
+      "route": "import",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Nhập hàng",
+      "pass": true
+    },
+    {
+      "route": "products",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Sản phẩm kính mắt",
+      "pass": true
+    },
+    {
+      "route": "customers",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Khách hàng",
+      "pass": true
+    },
+    {
+      "route": "suppliers",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Nhà cung cấp",
+      "pass": true
+    },
+    {
+      "route": "catalogs",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Danh mục",
+      "pass": true
+    },
+    {
+      "route": "search",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Tìm kiếm & tra cứu",
+      "pass": true
+    },
+    {
+      "route": "reports",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Báo cáo kinh doanh",
+      "pass": true
+    },
+    {
+      "route": "users",
+      "viewport": 320,
+      "content": 320,
+      "heading": "Tài khoản nhân viên",
+      "pass": true
+    },
+    {
+      "route": "overview",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Tổng quan cửa hàng",
+      "pass": true
+    },
+    {
+      "route": "sale",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Bán hàng",
+      "pass": true
+    },
+    {
+      "route": "import",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Nhập hàng",
+      "pass": true
+    },
+    {
+      "route": "products",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Sản phẩm kính mắt",
+      "pass": true
+    },
+    {
+      "route": "customers",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Khách hàng",
+      "pass": true
+    },
+    {
+      "route": "suppliers",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Nhà cung cấp",
+      "pass": true
+    },
+    {
+      "route": "catalogs",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Danh mục",
+      "pass": true
+    },
+    {
+      "route": "search",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Tìm kiếm & tra cứu",
+      "pass": true
+    },
+    {
+      "route": "reports",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Báo cáo kinh doanh",
+      "pass": true
+    },
+    {
+      "route": "users",
+      "viewport": 390,
+      "content": 390,
+      "heading": "Tài khoản nhân viên",
+      "pass": true
+    },
+    {
+      "route": "overview",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Tổng quan cửa hàng",
+      "pass": true
+    },
+    {
+      "route": "sale",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Bán hàng",
+      "pass": true
+    },
+    {
+      "route": "import",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Nhập hàng",
+      "pass": true
+    },
+    {
+      "route": "products",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Sản phẩm kính mắt",
+      "pass": true
+    },
+    {
+      "route": "customers",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Khách hàng",
+      "pass": true
+    },
+    {
+      "route": "suppliers",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Nhà cung cấp",
+      "pass": true
+    },
+    {
+      "route": "catalogs",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Danh mục",
+      "pass": true
+    },
+    {
+      "route": "search",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Tìm kiếm & tra cứu",
+      "pass": true
+    },
+    {
+      "route": "reports",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Báo cáo kinh doanh",
+      "pass": true
+    },
+    {
+      "route": "users",
+      "viewport": 768,
+      "content": 768,
+      "heading": "Tài khoản nhân viên",
+      "pass": true
+    },
+    {
+      "route": "overview",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Tổng quan cửa hàng",
+      "pass": true
+    },
+    {
+      "route": "sale",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Bán hàng",
+      "pass": true
+    },
+    {
+      "route": "import",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Nhập hàng",
+      "pass": true
+    },
+    {
+      "route": "products",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Sản phẩm kính mắt",
+      "pass": true
+    },
+    {
+      "route": "customers",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Khách hàng",
+      "pass": true
+    },
+    {
+      "route": "suppliers",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Nhà cung cấp",
+      "pass": true
+    },
+    {
+      "route": "catalogs",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Danh mục",
+      "pass": true
+    },
+    {
+      "route": "search",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Tìm kiếm & tra cứu",
+      "pass": true
+    },
+    {
+      "route": "reports",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Báo cáo kinh doanh",
+      "pass": true
+    },
+    {
+      "route": "users",
+      "viewport": 1440,
+      "content": 1440,
+      "heading": "Tài khoản nhân viên",
+      "pass": true
+    }
+  ]
+}

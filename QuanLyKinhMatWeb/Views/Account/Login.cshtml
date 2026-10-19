@@ -1,0 +1,38 @@
+@model LoginInput
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#122d2b">
+    <title>Đăng nhập — Kính Mắt</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true">
+</head>
+<body class="login-screen">
+    <main class="login-layout">
+        <section class="login-story" aria-label="Cửa hàng kính mắt">
+            <a class="login-brand" href="/">◉—◉ <span>KÍNH MẮT</span></a>
+            <span class="login-tag">KHÔNG GIAN QUẢN LÝ CỬA HÀNG</span>
+            <h1>Một góc nhìn rõ ràng.<br>Một ngày làm việc gọn gàng.</h1>
+            <p>Từ chiếc kính đầu tiên đến đơn hàng cuối ngày — sản phẩm, khách hàng và công việc cùng ở một nơi.</p>
+            <svg class="login-glasses" viewBox="0 0 400 190" fill="none" aria-hidden="true"><ellipse cx="200" cy="100" rx="180" ry="70" stroke="#7eaa97" stroke-opacity=".25"/><g stroke="#b1dfbf" stroke-width="7"><rect x="50" y="65" width="125" height="83" rx="32"/><rect x="225" y="65" width="125" height="83" rx="32"/><path d="M175 85q25-25 50 0M50 82l16-55h39m245 55-16-55h-39"/></g></svg>
+            <div class="login-story-bottom"><span>Quản lý chủ động</span><span>Dữ liệu nhất quán</span><span>Chăm sóc khách hàng</span></div>
+        </section>
+        <section class="login-card">
+            <span class="eyebrow">CHÀO MỪNG TRỞ LẠI</span>
+            <h2>Đăng nhập cửa hàng</h2>
+            <p class="login-description">Tiếp tục công việc của bạn hôm nay.</p>
+            <form asp-controller="Account" asp-action="Login" method="post" class="login-form">
+                <input type="hidden" asp-for="ReturnUrl">
+                <div asp-validation-summary="All" class="login-errors" role="alert"></div>
+                <label>Mã nhân viên / tên đăng nhập<input asp-for="UserName" autocomplete="username" autofocus required maxlength="50" placeholder="Nhập mã nhân viên, ví dụ: 1"></label>
+                <label>Mật khẩu<input asp-for="Password" type="password" autocomplete="current-password" required maxlength="128" placeholder="Nhập mật khẩu"></label>
+                <label class="remember"><input asp-for="RememberMe" type="checkbox"> Giữ đăng nhập trên máy này</label>
+                <button type="submit" class="button primary">Đăng nhập <span aria-hidden="true">→</span></button>
+            </form>
+            <p class="login-note">Liên hệ quản lý cửa hàng nếu bạn cần cấp tài khoản hoặc đặt lại mật khẩu.</p>
+            <div class="login-card-footer">KÍNH MẮT <span>STORE MANAGEMENT</span></div>
+        </section>
+    </main>
+</body>
+</html>

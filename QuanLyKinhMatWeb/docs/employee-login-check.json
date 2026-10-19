@@ -1,0 +1,111 @@
+{
+  "recordedAt": "2026-10-19T17:08:13.852Z",
+  "tests": [
+    {
+      "name": "Login form labels employee ID",
+      "pass": true
+    },
+    {
+      "name": "Employee 1 uses the original employee identity",
+      "pass": true
+    },
+    {
+      "name": "Employee 1 has its mapped role",
+      "pass": true
+    },
+    {
+      "name": "Employee 1 reads business data",
+      "pass": true
+    },
+    {
+      "name": "Employee 1 account administration permission",
+      "pass": true
+    },
+    {
+      "name": "All three imported accounts link to matching employee IDs",
+      "pass": true
+    },
+    {
+      "name": "Account API contains no password or hash fields",
+      "pass": true
+    },
+    {
+      "name": "Only the three employee accounts remain",
+      "pass": true
+    },
+    {
+      "name": "Accounts screen shows three employee rows and no demo names",
+      "pass": true
+    },
+    {
+      "name": "Employee 1 logout removes authentication",
+      "pass": true
+    },
+    {
+      "name": "Login form labels employee ID",
+      "pass": true
+    },
+    {
+      "name": "Employee 2 uses the original employee identity",
+      "pass": true
+    },
+    {
+      "name": "Employee 2 has its mapped role",
+      "pass": true
+    },
+    {
+      "name": "Employee 2 reads business data",
+      "pass": true
+    },
+    {
+      "name": "Employee 2 account administration permission",
+      "pass": true
+    },
+    {
+      "name": "Employee 2 logout removes authentication",
+      "pass": true
+    },
+    {
+      "name": "Login form labels employee ID",
+      "pass": true
+    },
+    {
+      "name": "Employee 3 uses the original employee identity",
+      "pass": true
+    },
+    {
+      "name": "Employee 3 has its mapped role",
+      "pass": true
+    },
+    {
+      "name": "Employee 3 reads business data",
+      "pass": true
+    },
+    {
+      "name": "Employee 3 account administration permission",
+      "pass": true
+    },
+    {
+      "name": "Employee 3 logout removes authentication",
+      "pass": true
+    },
+    {
+      "name": "Wrong password for employee ID is rejected",
+      "pass": true
+    },
+    {
+      "name": "Removed demo admin cannot authenticate",
+      "pass": true
+    },
+    {
+      "name": "Removed demo nhanvien cannot authenticate",
+      "pass": true
+    },
+    {
+      "name": "No uncaught browser errors",
+      "pass": true
+    }
+  ],
+  "browserErrors": [],
+  "completed": true
+}

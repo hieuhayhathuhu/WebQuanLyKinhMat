@@ -1,0 +1,195 @@
+{
+  "recordedAt": "2026-10-19T16:51:51.014789+00:00",
+  "removedDemoAccounts": 2,
+  "removedUnreferencedDemoEmployees": 2,
+  "remainingAccountUserNames": [
+    "1",
+    "2",
+    "3"
+  ],
+  "coreChecksPassed": 55,
+  "coreResults": "QA1792428679860.json",
+  "employeeChecksPassed": 26,
+  "employeeResults": "employee-login-check.json",
+  "sqlSyntaxBatchesPassed": 175,
+  "seedContainsHashedEmployeeAccounts": 3,
+  "originalDatabaseUnchanged": true,
+  "originalFingerprintBaseline": {
+    "formatVersion": 1,
+    "algorithm": "SHA256(sorted SHA256(length-prefixed SQL binary row values))",
+    "createdAt": "2026-10-19T16:47:28.4151246Z",
+    "server": "HIEUCOI\\SQLEXPRESS",
+    "database": "QuanLyKinhMat",
+    "schemaSha256": "799ab6e5119b6cedb51dab9224fcfc911d9366830f9e569117f48878f29f887c",
+    "tables": [
+      {
+        "schema": "dbo",
+        "table": "BaoHanh",
+        "columns": 2,
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "schema": "dbo",
+        "table": "ChatLieu",
+        "columns": 2,
+        "rows": 3,
+        "sha256": "bdba67e3310a3f45eb7b210c0e0ea75b89f71aa46aae6da89ae2a9d40418eac2"
+      },
+      {
+        "schema": "dbo",
+        "table": "ChiTietHoaDonBan",
+        "columns": 7,
+        "rows": 9,
+        "sha256": "e133ddf4939eea11d20931ee0ed71b62c6cbaeef9355987affd941fb4b204cb0"
+      },
+      {
+        "schema": "dbo",
+        "table": "ChiTietPhieuNhap",
+        "columns": 9,
+        "rows": 6,
+        "sha256": "aa43915a18e90887d77c1017d6802a3b7382c44571a26fea6751eb13515cb71f"
+      },
+      {
+        "schema": "dbo",
+        "table": "ChucVu",
+        "columns": 2,
+        "rows": 3,
+        "sha256": "78e1da512dfb822085d0e50b31e99d4391eee0f0453cd66f279adfdebc0eb781"
+      },
+      {
+        "schema": "dbo",
+        "table": "CongDung",
+        "columns": 2,
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "schema": "dbo",
+        "table": "DacDiem",
+        "columns": 2,
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "schema": "dbo",
+        "table": "Diop",
+        "columns": 2,
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "schema": "dbo",
+        "table": "HinhDang",
+        "columns": 2,
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "schema": "dbo",
+        "table": "HoaDonBan",
+        "columns": 9,
+        "rows": 5,
+        "sha256": "eaca22871dcbaf07c4ac55a89fba97ae4f1affc761293ae247300cf9e2f7f782"
+      },
+      {
+        "schema": "dbo",
+        "table": "KhachHang",
+        "columns": 7,
+        "rows": 5,
+        "sha256": "5f46a804d4a3a1b87d1b63f140c2867477ef883907d344d873e6ae7db5daa1cd"
+      },
+      {
+        "schema": "dbo",
+        "table": "LoaiGong",
+        "columns": 2,
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "schema": "dbo",
+        "table": "LoaiSanPham",
+        "columns": 2,
+        "rows": 5,
+        "sha256": "90ef9bf4dc5cc0d6de799ac6ef16668fba89b42c28c98df1b432647295a955d8"
+      },
+      {
+        "schema": "dbo",
+        "table": "MauSac",
+        "columns": 2,
+        "rows": 5,
+        "sha256": "7fdd9d596a2f6dc0f08730be22f24a8bec5e227c184d7eaae0ba92e053421f41"
+      },
+      {
+        "schema": "dbo",
+        "table": "NhaCungCap",
+        "columns": 5,
+        "rows": 3,
+        "sha256": "383b19dbfaaa62ee820fde190da7450191f3889942abaf416633497ef641990b"
+      },
+      {
+        "schema": "dbo",
+        "table": "NhanVien",
+        "columns": 10,
+        "rows": 3,
+        "sha256": "1f7f8c429d11dedceaa95cc902514e84415d8b460ff940eb469b52cbacb87feb"
+      },
+      {
+        "schema": "dbo",
+        "table": "NuocSanXuat",
+        "columns": 2,
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "schema": "dbo",
+        "table": "PhieuNhap",
+        "columns": 9,
+        "rows": 3,
+        "sha256": "6aec9727511b8ef1fd56d7901aeea4683396671128b3d1eb8a9f4a7e1dbc2d58"
+      },
+      {
+        "schema": "dbo",
+        "table": "SanPham",
+        "columns": 31,
+        "rows": 8,
+        "sha256": "bac8ec04b641deff76762aba5e7ac0856b9e85eeff33adaf7de6cd32fba17ae9"
+      },
+      {
+        "schema": "dbo",
+        "table": "sysdiagrams",
+        "columns": 5,
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "schema": "dbo",
+        "table": "TaiKhoan",
+        "columns": 6,
+        "rows": 3,
+        "sha256": "d1aac05fc9525af113b9bd545127eeecf435d977bd45794229aa08683a64b266"
+      },
+      {
+        "schema": "dbo",
+        "table": "ThuongHieu",
+        "columns": 3,
+        "rows": 5,
+        "sha256": "580d4e1e74d66365694ee0cf740128ecca20778759c16b709eb1e4f8bc06ebe0"
+      }
+    ]
+  },
+  "freshDatabaseRecreationTested": false,
+  "note": "SQL đã được kiểm tra cú pháp PARSEONLY; không xóa hoặc tạo lại database đang dùng để thử bộ nộp.",
+  "solutionBuild": {
+    "errors": 0,
+    "warnings": 0,
+    "projectPath": "KinhMat.Web/QuanLyKinhMatWeb.csproj"
+  },
+  "rootLauncherTest": {
+    "port": 5086,
+    "passed": true,
+    "employeeChecks": 26
+  },
+  "preferredSolution": "KinhMat.Web.slnx",
+  "slnxProjectListValidated": true
+}

@@ -1,0 +1,25 @@
+# Visual Studio and .NET output
+.vs/
+**/.vs/
+**/bin/
+**/obj/
+**/runtime/
+**/.dotnet-home/
+**/App_Data/
+**/artifacts/
+**/node_modules/
+**/TestResults/
+*.user
+*.suo
+*.log
+*.tmp
+*.zip
+# Local connection overrides and credentials
+**/appsettings.Local.json
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.pem
+*.key
