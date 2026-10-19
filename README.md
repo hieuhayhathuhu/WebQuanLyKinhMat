@@ -1,66 +1,80 @@
 # WebQuanLyKinhMat
 
-Ứng dụng quản lý cửa hàng kính mắt phục vụ bài tập lớn môn Lập trình web. Hệ thống hỗ trợ quản lý hàng hóa, nhập hàng, bán hàng, tồn kho và doanh thu, xây dựng bằng **ASP.NET Core MVC (.NET 10)** và **SQL Server**.
+**Bài tập lớn môn Lập trình web — Website quản lý cửa hàng kính mắt.**
 
-Đây là ứng dụng dành cho quản lý và nhân viên cửa hàng. Mã nguồn, solution, bộ SQL và tài liệu được đặt chung trong repository để thuận tiện mở, chạy và nộp bài.
+Ứng dụng dùng ASP.NET Core MVC (.NET 10), C#, Razor, JavaScript và SQL Server; truy cập dữ liệu bằng ADO.NET/`Microsoft.Data.SqlClient`. Hệ thống dành cho quản lý và nhân viên, hỗ trợ bán hàng, nhập hàng, quản lý tồn kho và báo cáo doanh thu.
 
-**Bắt đầu tại:** [Cài đặt và sử dụng](CAI_DAT_VA_SU_DUNG.md) · [Báo cáo kỹ thuật](WebQuanLyKinhMat/docs/report.md) · [Kiến trúc hệ thống](WebQuanLyKinhMat/docs/architecture.md)
+![Giao diện quản lý sản phẩm](WebQuanLyKinhMat/docs/screenshots/products-desktop.png)
 
-![Màn hình quản lý sản phẩm](WebQuanLyKinhMat/docs/screenshots/products-desktop.png)
+## 1. Tài khoản đăng nhập
 
-## Chức năng chính
+| Tên đăng nhập | Mật khẩu khởi tạo | Quyền |
+|---|---|---|
+| `1` | `hieucoi12345` | Quản lý (`Admin`) |
+| `2` | `hieucoi12345` | Nhân viên (`Staff`) |
+| `3` | `hieucoi12345` | Nhân viên (`Staff`) |
 
-| Nhóm chức năng | Nội dung |
-|---|---|
-| Tài khoản | Đăng nhập, đăng xuất, đổi mật khẩu cá nhân; quản lý tài khoản theo quyền. |
-| Sản phẩm và danh mục | Quản lý sản phẩm, loại sản phẩm, thương hiệu, chất liệu, màu sắc và hình dáng; tìm kiếm, lọc và phân trang. |
-| Khách hàng, nhà cung cấp | Lưu thông tin liên hệ, tra cứu và cập nhật dữ liệu theo quyền. |
-| Bán hàng | Chọn sản phẩm, số lượng, giảm giá và khách hàng; lập, xem và hủy hóa đơn theo quyền. |
-| Nhập hàng | Chọn nhà cung cấp, nhập sản phẩm; lập, xem và hủy phiếu nhập, cập nhật giá và tồn kho. |
-| Thống kê | Tổng quan, doanh thu 7 hoặc 30 ngày gần nhất, sản phẩm bán chạy và xuất dữ liệu CSV. |
+Tên đăng nhập ban đầu trùng mã nhân viên. Tài khoản `2` và `3` cùng quyền `Staff`. Đây là tài khoản **web**; kết nối SQL Server dùng Windows Authentication. Mật khẩu lưu dạng băm trong `WebUsers`; nếu đã đổi thì dùng mật khẩu mới. Hai tài khoản demo `admin`, `nhanvien` đã được bỏ.
 
-### Phân quyền
+## 2. Khởi chạy dự án
 
-Quyền được kiểm tra tại máy chủ, đồng thời quyết định các mục hiển thị trên giao diện.
+1. Chuẩn bị **.NET 10 SDK** và **SQL Server**.
+2. Sửa tên `Server` trong `WebQuanLyKinhMat/appsettings.json` cho đúng máy; giữ database **`QuanLyKinhMatWeb`**.
+3. Mở thư mục project bên trong, chạy **`CHAY-WEB.cmd`**, đợi biên dịch rồi truy cập [http://127.0.0.1:5080](http://127.0.0.1:5080).
 
-| Thao tác | Quản lý (`Admin`) | Nhân viên (`Staff`) |
-|---|:---:|:---:|
-| Xem tổng quan, báo cáo, sản phẩm và danh mục | Có | Có |
-| Thêm, sửa, xóa sản phẩm và danh mục | Có | Không |
-| Quản lý nhà cung cấp | Có | Không có màn hình quản lý |
-| Thêm, sửa, xóa khách hàng | Có | Có |
-| Lập và xem hóa đơn bán | Có | Có |
-| Hủy hóa đơn bán | Có | Không |
-| Xem, lập và hủy phiếu nhập | Có | Không |
-| Quản lý tài khoản | Có | Không |
-| Đổi mật khẩu của bản thân, đăng xuất | Có | Có |
+Launcher tự khởi tạo database từ `QuanLyKinhMat.sql` nếu chưa có; tài khoản Windows cần quyền tạo database. Database đã có được giữ nguyên. Dùng **`TAT-WEB.cmd`** để dừng.
 
-Nhân viên có thể đọc dữ liệu nhà cung cấp qua API; thao tác quản lý và màn hình nhà cung cấp dành cho quản lý. Hai tài khoản nhân viên trong bộ dữ liệu dùng chung quyền `Staff`, chưa tách riêng quyền bán hàng và quyền kho.
+Muốn mở bằng Visual Studio, dùng **`WebQuanLyKinhMat.slnx` ở ngoài cùng**. Xem [hướng dẫn cài đặt ngắn](CAI_DAT_VA_SU_DUNG.md) để chuẩn bị database trước khi nhấn F5.
 
-## Công nghệ và tổ chức mã nguồn
+## 3. Chức năng đã thực hiện
 
-| Thành phần | Công nghệ |
-|---|---|
-| Máy chủ | C#, ASP.NET Core MVC, Razor, .NET 10 |
-| Truy cập dữ liệu | ADO.NET qua `Microsoft.Data.SqlClient`, SQL có tham số |
-| Giao diện | HTML, CSS, JavaScript; gọi API bằng `fetch` |
-| Cơ sở dữ liệu | SQL Server; khởi tạo bằng script PowerShell và bộ SQL đi kèm |
-| Xác thực | Cookie, hai vai trò `Admin`/`Staff`, mật khẩu băm bằng ASP.NET Core PasswordHasher |
+| Chức năng | Quản lý | Nhân viên |
+|---|---|---|
+| Tổng quan, báo cáo doanh thu 7/30 ngày, sản phẩm bán chạy, xuất CSV | Có | Có |
+| Sản phẩm và danh mục: loại, thương hiệu, chất liệu, màu sắc, hình dáng | Thêm, sửa, xóa, tra cứu | Tra cứu |
+| Khách hàng | Thêm, sửa, xóa, tra cứu | Thêm, sửa, xóa, tra cứu |
+| Nhà cung cấp | Quản lý | Không có màn hình quản lý |
+| Hóa đơn bán | Lập, xem, hủy | Lập, xem |
+| Phiếu nhập | Lập, xem, hủy | Không |
+| Tài khoản nhân viên | Tạo, sửa quyền/trạng thái, đặt mật khẩu | Không |
+| Đổi mật khẩu cá nhân, đăng xuất | Có | Có |
 
-Repository chứa mã nguồn; cần **.NET 10 SDK** để biên dịch. Không cần cài Node.js để chạy ứng dụng thông thường.
+Quyền được kiểm tra trên máy chủ. Nhân viên vẫn có thể đọc danh sách nhà cung cấp qua API. Tìm kiếm hỗ trợ tiếng Việt không dấu, kết hợp bộ lọc và phân trang.
+
+**Quy tắc nghiệp vụ:** nhập tăng tồn, bán giảm tồn; máy chủ kiểm tra lại giá/tồn trước khi lưu và dùng transaction để tránh ghi dở dang. Gửi lại cùng mã xác nhận với cùng nội dung chỉ tạo một chứng từ. Hủy chứng từ giữ lịch sử và hoàn tác tồn đúng một lần; hủy nhập bị từ chối khi không đủ tồn để trừ lại.
+
+Phiếu nhập cập nhật giá nhập theo đơn giá và giá bán bằng **110% đơn giá nhập**. Sản phẩm đã có chứng từ không được sửa tồn trực tiếp. Doanh thu tính hóa đơn bán hoàn tất sau giảm giá; dữ liệu mẫu có ngày giao dịch cũ nên thống kê kỳ gần nhất có thể bằng 0.
+
+## 4. Bảng kiểm thử tiêu biểu
+
+Các ca dưới đây tóm tắt kết quả đã ghi nhận ngày **19/10/2026**, bằng Microsoft Edge và SQL Server local. Các sản phẩm/khách hàng QA là dữ liệu tạo riêng cho kiểm thử và đã được dọn sau khi chạy.
+
+| ID | Chức năng kiểm thử | Dữ liệu đầu vào / thao tác | Kết quả kỳ vọng | Kết quả thực tế | Trạng thái |
+|---|---|---|---|---|:---:|
+| TC01 | Đăng nhập quản lý | Tài khoản `1`, mật khẩu khởi tạo | Vào ứng dụng, có quyền quản lý | Đúng mã nhân viên và vai trò `Admin`; truy cập được quản lý tài khoản | PASS |
+| TC02 | Đăng nhập sai | Mã nhân viên hợp lệ, mật khẩu sai | Từ chối, không tạo phiên đăng nhập | Hiện thông báo lỗi; API cần đăng nhập vẫn trả 401 | PASS |
+| TC03 | Phân quyền nhân viên | Staff gọi API tạo/sửa tài khoản quản lý | Bị từ chối; không thay đổi tài khoản | Trả 403; danh sách tài khoản giữ nguyên | PASS |
+| TC04 | Thêm và sửa sản phẩm | Nhập sản phẩm QA hợp lệ, sửa tên/giá rồi đọc lại | Lưu vào SQL, hiển thị đúng dữ liệu mới | Form thêm/sửa thành công; dữ liệu đọc lại khớp | PASS |
+| TC05 | Kiểm tra dữ liệu không hợp lệ | Tên sản phẩm rỗng, giá âm hoặc tồn âm | Báo lỗi, không thêm sản phẩm | API trả 400; số bản ghi không tăng | PASS |
+| TC06 | Tìm kiếm, lọc và phân trang | Bộ 12 sản phẩm QA có dấu/Đ; tìm không dấu, đổi bộ lọc và trang | Tìm đúng, phân trang và bộ lọc nhất quán | Hai trang 8 + 4 sản phẩm; lọc đúng, tìm mới về trang 1 | PASS |
+| TC07 | Bán hàng và giảm giá | Bán 2 chiếc × 110.000đ, giảm 10%, tồn ban đầu 20 | Tổng 198.000đ; tồn còn 18 | Lưu đúng tổng 198.000đ; tồn từ 20 xuống 18 | PASS |
+| TC08 | Nhập nhiều sản phẩm | Nhập hai dòng QA, số lượng 2 và 3, có giá lẻ/giảm giá | Đúng tổng, nhà cung cấp, người lập và tồn từng dòng | Tổng 906.444,79đ; tồn 20→22 và 30→33; thông tin khớp | PASS |
+| TC09 | Bán vượt tồn | Số lượng bán lớn hơn tồn hiện tại | Từ chối toàn giao dịch; không đổi tồn | Trả 409; không tạo hóa đơn dở dang | PASS |
+| TC10 | Hủy chứng từ | Hủy hóa đơn bán; thử hủy lại cùng chứng từ | Hoàn tồn một lần, giữ lịch sử đã hủy | Tồn khôi phục; lần hủy lặp không cộng thêm tồn | PASS |
+| TC11 | Chống lưu trùng | Gửi đồng thời hai yêu cầu cùng mã xác nhận và nội dung | Chỉ lưu một hóa đơn, trừ tồn một lần | Hai phản hồi cùng mã hóa đơn; tồn chỉ giảm một lần | PASS |
+| TC12 | Báo cáo theo mã sản phẩm | Hai mã cùng tên; một mã đổi tên qua thời gian | Khác mã tách nhóm, cùng mã giữ một nhóm | Hàm báo cáo trả đúng 2 nhóm và 1 nhóm tương ứng | PASS |
+| TC13 | Xuất CSV tiếng Việt | Tên chứa dấu, dấu phẩy/nháy và số tiền `123456.78` | Giữ đúng nội dung và số tiền | CSV có BOM UTF-8; giữ Unicode, ký tự và số lẻ | PASS |
+| TC14 | Giao diện trên nhiều kích thước | 10 màn hình tại 320, 390, 768 và 1440px | Không tràn chiều rộng trang; bảng cuộn trong khung | 40/40 tổ hợp bố cục đạt | PASS |
+
+**Tổng hợp đã lưu:** 186/186 kiểm tra chức năng/hồi quy và 40/40 bố cục. Sau khi bỏ tài khoản demo, bộ nghiệp vụ được chạy lại đạt 55/55; lượt riêng kiểm tra ba tài khoản nhân viên đạt 26/26. Các bộ khác giữ kết quả của những lượt trước. Bản solution theo tên hiện tại đã build với 0 lỗi, 0 cảnh báo.
+
+Bằng chứng: [test-results.json](WebQuanLyKinhMat/docs/test-results.json), [employee-login-check.json](WebQuanLyKinhMat/docs/employee-login-check.json), [submission-check.json](WebQuanLyKinhMat/docs/submission-check.json), [github-ready.json](WebQuanLyKinhMat/docs/github-ready.json). Xem [toàn bộ ca kiểm thử](WebQuanLyKinhMat/docs/test-cases.md) và [thuyết minh kết quả](WebQuanLyKinhMat/docs/verification.md) khi cần đối chiếu.
+
+## 5. Cấu trúc và tài liệu
 
 ```text
-WebQuanLyKinhMat/                  # Thư mục repository
-├── WebQuanLyKinhMat/              # Project ASP.NET Core MVC
-│   ├── Controllers/               # Trang MVC và API
-│   ├── Data/, Models/, Services/  # Dữ liệu, mô hình và nghiệp vụ
-│   ├── Views/, wwwroot/           # Razor, CSS, JavaScript và tài nguyên
-│   ├── Properties/               # Cấu hình chạy trong IDE
-│   ├── scripts/, tests/, docs/    # Script, kiểm thử và tài liệu kỹ thuật
-│   ├── appsettings.json
-│   ├── CHAY-WEB.cmd
-│   ├── TAT-WEB.cmd
-│   └── WebQuanLyKinhMat.csproj
+WebQuanLyKinhMat/
+├── WebQuanLyKinhMat/         # Project MVC: Controllers, Models, Views, wwwroot...
 ├── .gitignore
 ├── CAI_DAT_VA_SU_DUNG.md
 ├── QuanLyKinhMat.sql
@@ -68,63 +82,11 @@ WebQuanLyKinhMat/                  # Thư mục repository
 └── README.md
 ```
 
-Mở **`WebQuanLyKinhMat.slnx` ở ngoài cùng** để làm việc trong Visual Studio. Hai thư mục cùng tên là có chủ đích: thư mục ngoài chứa bộ nộp, thư mục trong chứa project.
+File SQL được runner nạp vào database **`QuanLyKinhMatWeb`**. Bộ dữ liệu có 22 bảng; máy cài mới không cần database WinForms gốc. Giỏ chưa lưu chỉ giữ trong trang đang mở, tải lại trang sẽ mất giỏ. Ứng dụng đã kiểm tra trong môi trường local; phạm vi kiểm thử được ghi trong tài liệu kết quả.
 
-## Chạy nhanh trên Windows
-
-1. Cài **.NET 10 SDK** và **SQL Server**; cần truy cập nguồn NuGet cho lần khôi phục thư viện đầu tiên nếu máy chưa có cache.
-2. Trong `WebQuanLyKinhMat/appsettings.json`, đổi `Server` thành tên SQL Server/instance của máy. Mặc định là `HIEUCOI\SQLEXPRESS`, sử dụng Windows Authentication. Giữ `Database=QuanLyKinhMatWeb`. Có thể dùng file `appsettings.Local.json` riêng theo [hướng dẫn cài đặt](CAI_DAT_VA_SU_DUNG.md).
-3. Vào thư mục project bên trong, nhấp đúp **`CHAY-WEB.cmd`**. Script kiểm tra database, khởi tạo nếu chưa có, biên dịch mã nguồn và mở trình duyệt tại [http://127.0.0.1:5080](http://127.0.0.1:5080).
-4. Đăng nhập bằng một tài khoản trong bảng dưới. Khi dùng xong, chạy **`TAT-WEB.cmd`** trong cùng thư mục project.
-
-**Lần đầu chạy:** tài khoản Windows kết nối SQL Server cần quyền tạo database. Bộ khởi tạo dùng file `QuanLyKinhMat.sql` ở ngoài cùng và dừng nếu database đã tồn tại; không ghi đè dữ liệu đang dùng. Máy mới không cần có database WinForms gốc.
-
-**Chạy bằng Visual Studio hoặc `dotnet run`:** phải khởi tạo database trước bằng script hoặc chạy nhanh một lần. Hai cách này không tự tạo database. Các lệnh và cách dừng tương ứng có trong [Cài đặt và sử dụng](CAI_DAT_VA_SU_DUNG.md).
-
-### Tài khoản trong bộ dữ liệu
-
-| Tên đăng nhập | Quyền trên web | Mật khẩu khởi tạo |
-|---|---|---|
-| `1` | Quản lý (`Admin`) | `hieucoi12345` |
-| `2` | Nhân viên (`Staff`) | `hieucoi12345` |
-| `3` | Nhân viên (`Staff`) | `hieucoi12345` |
-
-Ba tên đăng nhập ban đầu trùng mã nhân viên. Mật khẩu trên là mật khẩu đăng nhập **web**, không phải mật khẩu kết nối SQL Server. Bảng `WebUsers` lưu mật khẩu băm; khởi động lại ứng dụng không đặt lại mật khẩu đã đổi. Bộ dữ liệu hiện tại không tạo hai tài khoản demo `admin` và `nhanvien`.
-
-## Dữ liệu và quy tắc nghiệp vụ
-
-File **`QuanLyKinhMat.sql`** được runner nạp vào database **`QuanLyKinhMatWeb`**. Runner tạo database trước khi nạp schema và dữ liệu. Tên database này được kiểm tra trong chương trình; không đổi thành tên project. Bộ SQL có 22 bảng, dữ liệu mẫu gồm 8 sản phẩm, 5 khách hàng, 3 nhà cung cấp, 5 hóa đơn bán, 3 phiếu nhập và 3 tài khoản web.
-
-- Khi lưu chứng từ, máy chủ kiểm tra quyền, dữ liệu, trạng thái sản phẩm, giá và tồn kho. Ghi chứng từ và cập nhật tồn kho nằm trong cùng giao dịch; yêu cầu gửi lại với cùng mã xác nhận và cùng nội dung không tạo thêm chứng từ.
-- Bán hàng làm giảm tồn; nhập hàng làm tăng tồn. Phiếu nhập cập nhật giá nhập theo đơn giá nhập và giá bán bằng **110% đơn giá nhập**, làm tròn hai chữ số thập phân. Giảm giá nhập ảnh hưởng thành tiền, không thay đổi quy tắc cập nhật giá này.
-- Hủy giữ lại chứng từ và hoàn tác tồn theo nghiệp vụ. Hủy nhập bị từ chối khi tồn hiện tại không đủ; hệ thống chưa theo dõi tồn theo từng lô. Sản phẩm đã có chứng từ không được sửa tồn trực tiếp.
-- Dữ liệu đã được tham chiếu có thể bị từ chối xóa. Có thể ngừng kinh doanh sản phẩm để giữ lịch sử chứng từ.
-- Doanh thu tính từ hóa đơn bán hoàn tất, sau giảm giá; báo cáo chưa tính lợi nhuận. Dữ liệu mẫu có ngày giao dịch cũ nên doanh thu hôm nay hoặc 7/30 ngày gần nhất có thể bằng 0.
-
-Xem [thiết kế dữ liệu](WebQuanLyKinhMat/docs/database.md) và [ca kiểm thử](WebQuanLyKinhMat/docs/test-cases.md) để biết thêm chi tiết.
-
-## Kết quả kiểm thử
-
-Các lần kiểm tra được lưu kèm bằng chứng trong thư mục `docs`:
-
-| Phạm vi | Kết quả đã ghi nhận | Bằng chứng |
-|---|---|---|
-| Biên dịch solution theo tên project hiện tại | 0 lỗi, 0 cảnh báo | [github-ready.json](WebQuanLyKinhMat/docs/github-ready.json) |
-| Đăng nhập, vai trò và tài khoản nhân viên | 26/26 kiểm tra đạt | [employee-login-check.json](WebQuanLyKinhMat/docs/employee-login-check.json) |
-| API và nghiệp vụ cốt lõi sau khi bỏ tài khoản demo | 55 kiểm tra đạt | [submission-check.json](WebQuanLyKinhMat/docs/submission-check.json) |
-
-[Tổng hợp kiểm thử](WebQuanLyKinhMat/docs/verification.md) còn lưu các đợt kiểm tra chức năng, hồi quy và bố cục trước đó. Bộ SQL đã được kiểm tra cú pháp; chưa thử xóa rồi tạo lại database hiện tại để kiểm chứng cài đặt sạch.
-
-## Phạm vi hiện tại
-
-Ứng dụng được chuẩn bị để chạy cục bộ bằng HTTP trên máy Windows với SQL Server. Chưa kiểm chứng triển khai HTTPS công khai hoặc vận hành trên nhiều máy chủ. Giao diện dùng tiếng Việt; phân trang danh sách thực hiện trên dữ liệu đã tải về trình duyệt. Giỏ hàng chỉ giữ trong phiên trang đang mở, tải lại trang sẽ mất giỏ chưa lưu.
-
-## Tài liệu đi kèm
-
-- [Cài đặt, vận hành, xử lý lỗi và đưa lên GitHub](CAI_DAT_VA_SU_DUNG.md).
+- [Cài đặt, chạy và nộp GitHub](CAI_DAT_VA_SU_DUNG.md).
 - [Báo cáo bài tập lớn](WebQuanLyKinhMat/docs/report.md).
-- [Kiến trúc ứng dụng](WebQuanLyKinhMat/docs/architecture.md) · [Cơ sở dữ liệu](WebQuanLyKinhMat/docs/database.md).
-- [Thiết kế giao diện](WebQuanLyKinhMat/docs/wireframes.md) · [Ảnh giao diện trên điện thoại](WebQuanLyKinhMat/docs/screenshots/products-mobile.png).
-- [Ca kiểm thử](WebQuanLyKinhMat/docs/test-cases.md) · [Kết quả kiểm thử](WebQuanLyKinhMat/docs/verification.md).
+- [Kiến trúc ứng dụng](WebQuanLyKinhMat/docs/architecture.md) · [Thiết kế database](WebQuanLyKinhMat/docs/database.md).
+- [Thiết kế giao diện](WebQuanLyKinhMat/docs/wireframes.md).
 
-Trước khi nộp, nhóm cần bổ sung thông tin trường, lớp, giảng viên, thành viên và nội dung khảo sát thực tế còn để trống trong báo cáo; kiểm tra lại trên máy sẽ dùng để trình bày bài.
+Thông tin trường, lớp, giảng viên, thành viên và khảo sát thực tế trong báo cáo cần được nhóm bổ sung trước khi nộp.
