@@ -65,9 +65,10 @@
       "productId": 4,
       "name": "Oakley Sport",
       "url": "/images/products/sp004-oakley-sport.jpg",
-      "sha256": "0f3b07f671747a669717518e1da9a996e1dbdae6d1079b37215351ad4672795b",
-      "width": 160,
-      "height": 105
+      "sha256": "a95a5beb4439b071ee58c7a78d185f5adf7371a51b0d032d74ce387d80ab3318",
+      "width": 220,
+      "height": 220,
+      "sourceFile": "Anh10.jpg"
     },
     {
       "productId": 5,
@@ -101,5 +102,13 @@
       "width": 440,
       "height": 220
     }
-  ]
+  ],
+  "oakleyReplacement": {
+    "verifiedAt": "2026-10-20T01:31:53.289481+07:00",
+    "sourceFile": "Anh10.jpg",
+    "oldFileReplaced": true,
+    "imageUrlUnchanged": true,
+    "servedImageMatchesSource": true,
+    "uiImageLoaded": true
+  }
 }
