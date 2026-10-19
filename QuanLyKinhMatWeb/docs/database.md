@@ -2,7 +2,7 @@
 
 ## Phạm vi và nguồn dữ liệu
 
-`../../QuanLyKinhMatWeb.sql` được chuyển từ dump `QLKM.sql` của project WinForms đã cung cấp. Bộ script không đọc hoặc sao chép trực tiếp database đang hoạt động.
+`../../QuanLyKinhMat.sql` được chuyển từ dump `QLKM.sql` của project WinForms đã cung cấp. Bộ script không đọc hoặc sao chép trực tiếp database đang hoạt động.
 
 - Nguồn dump có **21 bảng nghiệp vụ**. Thêm `dbo.WebUsers` cho ứng dụng web, tổng cộng **22 bảng**. Bảng hệ thống như `sysdiagrams` không thuộc schema nghiệp vụ này.
 - Giữ tên bảng/cột, dữ liệu nghiệp vụ, identity, khóa chính/ngoại, default, check constraint và view gốc.
@@ -72,4 +72,4 @@ Không xuất `PasswordHash` hoặc dữ liệu cá nhân để chứng minh k�
 
 ## Vị trí SQL trong repository
 
-File SQL hoàn chỉnh nằm ở ngoài cùng: [QuanLyKinhMatWeb.sql](../../QuanLyKinhMatWeb.sql). Runner trong `scripts/Initialize-Database.ps1` đọc file này theo đường dẫn tương đối; không phụ thuộc tên thư mục clone hoặc database gốc trên máy chấm bài.
+File SQL hoàn chỉnh nằm ở ngoài cùng: [QuanLyKinhMat.sql](../../QuanLyKinhMat.sql). Runner trong `scripts/Initialize-Database.ps1` đọc file này theo đường dẫn tương đối; không phụ thuộc tên thư mục clone hoặc database gốc trên máy chấm bài.

@@ -77,7 +77,7 @@ Danh sách chính có GET theo ID tại sản phẩm, khách hàng và chứng t
 
 ## ERD
 
-Sơ đồ giữ tên bảng gốc để đối chiếu dump SQL. Chỉ liệt kê các trường khóa và trường quan trọng; định nghĩa SQL trong `../../QuanLyKinhMatWeb.sql` là căn cứ đầy đủ về kiểu dữ liệu/ràng buộc.
+Sơ đồ giữ tên bảng gốc để đối chiếu dump SQL. Chỉ liệt kê các trường khóa và trường quan trọng; định nghĩa SQL trong `../../QuanLyKinhMat.sql` là căn cứ đầy đủ về kiểu dữ liệu/ràng buộc.
 
 ```mermaid
 erDiagram

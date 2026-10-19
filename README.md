@@ -6,25 +6,14 @@ Bài tập lớn môn Lập trình web: ASP.NET Core MVC, C#, Razor, JavaScript 
 
 ```text
 QuanLyKinhMatWeb_GitHub/
+├── QuanLyKinhMatWeb/
 ├── .gitignore
-├── README.md
 ├── HUONG_DAN_DU_AN_BTL.md
-├── QuanLyKinhMatWeb.sql
+├── QuanLyKinhMat.sql
 ├── QuanLyKinhMatWeb.slnx
-├── CHAY-WEB.cmd
-├── TAT-WEB.cmd
-└── QuanLyKinhMatWeb/
-    ├── QuanLyKinhMatWeb.csproj
-    ├── Controllers/
-    ├── Models/
-    ├── Views/
-    ├── Data/
-    ├── Services/
-    ├── Properties/
-    ├── wwwroot/
-    ├── scripts/
-    └── docs/
+└── README.md
 ```
+
 
 ## Chức năng
 
@@ -38,10 +27,10 @@ QuanLyKinhMatWeb_GitHub/
 
 1. Cài .NET 10 SDK và SQL Server.
 2. Sửa tên `Server` trong `QuanLyKinhMatWeb/appsettings.json` cho đúng instance của máy. Giữ `Database=QuanLyKinhMatWeb` và Windows Authentication.
-3. Nhấp đúp **CHAY-WEB.cmd** ở ngoài cùng. Bản Git chứa source; lần đầu launcher build project rồi mở http://127.0.0.1:5080.
-4. Dừng bằng **TAT-WEB.cmd**.
+3. Mở thư mục `QuanLyKinhMatWeb`, nhấp đúp **CHAY-WEB.cmd** bên trong. Bản Git chứa source; lần đầu launcher build project rồi mở http://127.0.0.1:5080.
+4. Dừng bằng **TAT-WEB.cmd** trong cùng thư mục project.
 
-Khi database web chưa có, launcher tạo bằng `QuanLyKinhMatWeb.sql`; tài khoản Windows cần quyền tạo database. Database đã có không bị ghi đè. Máy chấm bài không cần database WinForms gốc.
+Khi database web chưa có, launcher tạo bằng `QuanLyKinhMat.sql`; tài khoản Windows cần quyền tạo database. Database đã có không bị ghi đè. Máy chấm bài không cần database WinForms gốc.
 
 Mở source bằng **QuanLyKinhMatWeb.slnx**, chọn project web rồi chạy trong Visual Studio. Chi tiết xem [hướng dẫn dự án](HUONG_DAN_DU_AN_BTL.md).
 

@@ -7,7 +7,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $databaseName = 'QuanLyKinhMatWeb'
 $projectRoot = Split-Path -Parent $PSScriptRoot
-$sqlPath = Join-Path (Split-Path -Parent $projectRoot) 'QuanLyKinhMatWeb.sql'
+$sqlPath = Join-Path (Split-Path -Parent $projectRoot) 'QuanLyKinhMat.sql'
 if (-not (Test-Path -LiteralPath $sqlPath -PathType Leaf)) {
     throw "Khong tim thay script: $sqlPath"
 }

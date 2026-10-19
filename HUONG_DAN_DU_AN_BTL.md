@@ -4,11 +4,11 @@
 
 Mở `QuanLyKinhMatWeb.slnx` ở ngoài cùng. Source nằm trong `QuanLyKinhMatWeb/QuanLyKinhMatWeb.csproj`, target `net10.0`. Chọn project web làm Startup Project.
 
-Nếu chỉ muốn chạy, dùng `CHAY-WEB.cmd`. File chạy sẽ tạo database mới khi chưa có, build source và mở trình duyệt. Bản Git không chứa thư viện biên dịch/runtime có sẵn.
+Nếu chỉ muốn chạy, mở thư mục `QuanLyKinhMatWeb` rồi dùng `CHAY-WEB.cmd` bên trong. File chạy sẽ tạo database mới khi chưa có, build source và mở trình duyệt. Bản Git không chứa thư viện biên dịch/runtime có sẵn.
 
 ## Database
 
-SQL nằm ở ngoài cùng: `QuanLyKinhMatWeb.sql`, gồm schema, dữ liệu và ba tài khoản hash. Đổi Server trong `QuanLyKinhMatWeb/appsettings.json` cho đúng máy; launcher và server cùng đọc cấu hình này. Có thể tạo `appsettings.Local.json` trong project để ghi cấu hình riêng; file đó đã được Git bỏ qua.
+SQL nằm ở ngoài cùng: `QuanLyKinhMat.sql`, gồm schema, dữ liệu và ba tài khoản hash. Đổi Server trong `QuanLyKinhMatWeb/appsettings.json` cho đúng máy; launcher và server cùng đọc cấu hình này. Có thể tạo `appsettings.Local.json` trong project để ghi cấu hình riêng; file đó đã được Git bỏ qua.
 
 Bộ SQL có guard và dùng runner để khởi tạo an toàn. Không cần chạy trực tiếp bằng F5 trong SSMS. Nếu muốn khởi tạo riêng:
 
@@ -28,7 +28,7 @@ dotnet build QuanLyKinhMatWeb.slnx
 dotnet run --project QuanLyKinhMatWeb/QuanLyKinhMatWeb.csproj --urls http://127.0.0.1:5080
 ```
 
-Dùng Ctrl+C để dừng phiên chạy từ Terminal. Dùng `TAT-WEB.cmd` cho phiên chạy bằng launcher.
+Dùng Ctrl+C để dừng phiên chạy từ Terminal. Dùng `QuanLyKinhMatWeb/TAT-WEB.cmd` cho phiên chạy bằng launcher.
 
 ## Đưa thư mục này lên GitHub
 

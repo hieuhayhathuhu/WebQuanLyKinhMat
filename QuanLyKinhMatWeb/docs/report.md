@@ -130,7 +130,7 @@ erDiagram
 
 Bổ sung theo dữ liệu đăng nhập thực tế: công cụ `Import-EmployeeLogins.ps1` chỉ đọc `NhanVien` gốc, đưa mã `1`/`2`/`3` và mật khẩu cũ sang `WebUsers` bằng PasswordHasher. Không sửa database gốc, không lưu lại mật khẩu văn bản trong bản web và không reset tài khoản khi chạy lại. Mã `1` là Admin, `2`/`3` là Staff. [employee-login-check.json](employee-login-check.json) ghi 26 kiểm tra đạt ở lượt mới cho đăng nhập/quyền/đăng xuất; hai tài khoản demo đã bị xóa, không tự tạo lại. SQL nộp kèm đủ ba hash nên không cần database gốc trên máy chấm bài.
 
-Các bảng thuộc tính cũ được giữ bảo toàn dữ liệu; giao diện CRUD hiện hỗ trợ năm nhóm: loại kính, thương hiệu, chất liệu, màu sắc, hình dáng. ERD đầy đủ và kiểu dữ liệu nằm trong [architecture.md](architecture.md), [schema SQL](../../QuanLyKinhMatWeb.sql), [hướng dẫn database](database.md).
+Các bảng thuộc tính cũ được giữ bảo toàn dữ liệu; giao diện CRUD hiện hỗ trợ năm nhóm: loại kính, thương hiệu, chất liệu, màu sắc, hình dáng. ERD đầy đủ và kiểu dữ liệu nằm trong [architecture.md](architecture.md), [schema SQL](../../QuanLyKinhMat.sql), [hướng dẫn database](database.md).
 
 ### 2.3. Use-case chính
 
@@ -373,7 +373,7 @@ Khảo sát, phân công và kết quả sử dụng ở cửa hàng phải do n
 | Kiến trúc, use-case, ERD | [architecture.md](architecture.md) |
 | Sitemap và wireframe | [wireframes.md](wireframes.md) |
 | Danh mục test và kết quả thực tế | [test-cases.md](test-cases.md), [verification.md](verification.md), [test-results.json](test-results.json) |
-| Schema, dữ liệu và quy tắc khởi tạo | [Hướng dẫn database](database.md), [SQL](../../QuanLyKinhMatWeb.sql) |
+| Schema, dữ liệu và quy tắc khởi tạo | [Hướng dẫn database](database.md), [SQL](../../QuanLyKinhMat.sql) |
 | Ảnh chạy thực tế | `docs/screenshots/` |
 | Mã nguồn | [QuanLyKinhMatWeb.csproj](../QuanLyKinhMatWeb.csproj), `Controllers`, `Models`, `Data`, `Services`, `Views`, `wwwroot` |
 | Công cụ và bản chạy | `CHAY-WEB.cmd`, `TAT-WEB.cmd`, `scripts/` (bản Git build từ source) |

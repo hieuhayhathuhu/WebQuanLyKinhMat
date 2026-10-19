@@ -38,7 +38,7 @@ for ($index=0; $index -lt 3; $index++) {
 }
 [void]$seed.AppendLine('GO')
 [void]$seed.AppendLine('-- END WEB EMPLOYEE ACCOUNT SEED')
-$file=Join-Path (Split-Path -Parent $projectRoot) 'QuanLyKinhMatWeb.sql'
+$file=Join-Path (Split-Path -Parent $projectRoot) 'QuanLyKinhMat.sql'
 $sql=[System.IO.File]::ReadAllText($file,[System.Text.Encoding]::UTF8)
 $sql=[regex]::Replace($sql,'(?s)\r?\n?-- BEGIN WEB EMPLOYEE ACCOUNT SEED.*?-- END WEB EMPLOYEE ACCOUNT SEED\s*','')
 $sql=$sql.TrimEnd()+"`r`n`r`n"+$seed.ToString()

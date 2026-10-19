@@ -33,7 +33,7 @@ Nếu tên máy/instance khác:
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Initialize-Database.ps1 -Server '.\SQLEXPRESS'
 ```
 
-Script tạo database mới từ `../QuanLyKinhMatWeb.sql`: giữ 21 bảng nghiệp vụ, các view, ràng buộc và dữ liệu của dump gốc; thêm `WebUsers` thành 22 bảng và thêm `KhachHang.GhiChu`. Mật khẩu cũ trong `NhanVien` bị loại bỏ; các tài khoản `TaiKhoan` cũ bị vô hiệu hóa. Tài khoản web dùng bảng `WebUsers` riêng.
+Script tạo database mới từ `../QuanLyKinhMat.sql`: giữ 21 bảng nghiệp vụ, các view, ràng buộc và dữ liệu của dump gốc; thêm `WebUsers` thành 22 bảng và thêm `KhachHang.GhiChu`. Mật khẩu cũ trong `NhanVien` bị loại bỏ; các tài khoản `TaiKhoan` cũ bị vô hiệu hóa. Tài khoản web dùng bảng `WebUsers` riêng.
 
 **Nếu `QuanLyKinhMatWeb` đã tồn tại, script dừng trước khi ghi dữ liệu.** Script không có chế độ ghi đè, xóa hoặc reset. Khi khởi tạo schema lỗi, giao dịch được rollback và database mới được giữ lại để kiểm tra; lần chạy sau cũng dừng vì database đã tồn tại. Xem [hướng dẫn database](docs/database.md).
 
