@@ -1,4 +1,4 @@
-# Cài đặt và sử dụng
+# Cài đặt và sử dụng WebQuanLyKinhMat
 
 ## 1. Chuẩn bị và kết nối SQL Server
 
@@ -56,18 +56,3 @@ Nhân viên được bán hàng và quản lý khách hàng; quản lý có thê
 | Doanh thu gần nhất bằng 0 | Dữ liệu mẫu có ngày giao dịch cũ; thử lập hóa đơn mới hợp lệ để xem số liệu hiện tại. |
 
 Log của phiên chạy nhanh nằm tại `WebQuanLyKinhMat/App_Data/server.log` và `server-error.log`. Chi tiết kỹ thuật và kiểm thử xem trong [README](README.md).
-
-## 6. Đưa lên GitHub
-
-Thư mục hiện tại đã có Git và nhánh `main`. Trên GitHub, chọn **New repository**, Owner **`hieuhayhathuhu`**, tên **`WebQuanLyKinhMat`**; chọn chế độ hiển thị theo yêu cầu nộp bài. Để trống phần tạo README, `.gitignore` và license rồi bấm **Create repository**.
-
-Mở PowerShell tại **thư mục ngoài cùng chứa `.slnx`** rồi chạy:
-
-```powershell
-git remote add origin https://github.com/hieuhayhathuhu/WebQuanLyKinhMat.git
-git push -u origin main
-```
-
-Nếu đã có `origin`, kiểm tra `git remote -v`; khi cần đổi địa chỉ, dùng `git remote set-url origin https://github.com/hieuhayhathuhu/WebQuanLyKinhMat.git` thay cho lệnh `remote add`. Với thay đổi mới, chạy `git add .`, `git commit -m "Cap nhat du an"` rồi `git push`.
-
-Kiểm tra trên GitHub có đủ thư mục project, `.slnx`, SQL và hai file Markdown rồi gửi link nộp bài. `.gitignore` đã loại `bin`, `obj`, `runtime`, `.vs`, log và cấu hình riêng.

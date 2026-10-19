@@ -1,18 +1,16 @@
-# Báo cáo bài tập lớn môn Lập trình web
+# Báo cáo kỹ thuật — WebQuanLyKinhMat
 
 **Đề tài: Xây dựng hệ thống quản lý cửa hàng kính mắt bằng ASP.NET Core MVC và SQL Server**
 
-| Thông tin | Nội dung |
+| Thông tin kỹ thuật | Nội dung |
 |---|---|
-| Trường, khoa | [Cần bổ sung] |
-| Lớp, mã học phần | [Cần bổ sung] |
-| Giảng viên hướng dẫn | [Cần bổ sung] |
-| Họ tên, mã sinh viên, nhóm thực hiện | [Cần bổ sung] |
-| Phân công và thời gian thực hiện của nhóm | [Cần bổ sung] |
-| Phiên bản kỹ thuật | `KinhMat.Web`, target `net10.0` |
+| Project | `WebQuanLyKinhMat` |
+| Nền tảng | ASP.NET Core MVC, target `net10.0` |
+| Cơ sở dữ liệu | SQL Server, database `QuanLyKinhMatWeb` |
+| Vai trò | Quản lý (`Admin`), nhân viên (`Staff`) |
 | Ngày tổng hợp kiểm thử | 19/10/2026 |
 
-Báo cáo mô tả ứng dụng web đã triển khai từ giao diện và dữ liệu nghiệp vụ được cung cấp. Hệ thống dùng ASP.NET Core MVC, Razor, JavaScript và SQL Server, có hai vai trò và database web riêng gồm 22 bảng. Kết quả thực tế gồm **186 kiểm tra đạt** và **40 tổ hợp kiểm tra bố cục** được ghi nhận riêng. Thông tin thành viên và khảo sát cửa hàng thực tế chỉ được xác nhận sau khi nhóm bổ sung.
+Báo cáo mô tả ứng dụng web đã triển khai từ giao diện và dữ liệu nghiệp vụ được cung cấp. Hệ thống dùng ASP.NET Core MVC, Razor, JavaScript và SQL Server, có hai vai trò và database web riêng gồm 22 bảng. Kết quả thực tế gồm **186 kiểm tra đạt** và **40 tổ hợp kiểm tra bố cục** được ghi nhận riêng.
 
 ## Mục lục
 
@@ -30,7 +28,7 @@ Cửa hàng kính mắt cần quản lý sản phẩm, thuộc tính kính, giá
 
 Đầu vào của đề tài gồm hướng dẫn bài tập lớn, giao diện web và project quản lý kính mắt có dữ liệu SQL Server. Project cũ là WinForms, được dùng tham khảo nghiệp vụ và dữ liệu. Sản phẩm trong báo cáo là ứng dụng web có backend HTTP và database riêng, xử lý xác thực, phân quyền và giao dịch tại máy chủ.
 
-Tên cửa hàng khảo sát, thời gian, phương pháp phỏng vấn và kết quả khảo sát thực tế: **[Cần bổ sung]**. Dữ liệu mẫu không được xem là bằng chứng khảo sát hoạt động kinh doanh thực tế.
+Phân tích trong tài liệu dựa trên quy trình nghiệp vụ, mã nguồn và bộ dữ liệu mẫu được cung cấp. Phạm vi đánh giá là ứng dụng chạy cục bộ và các ca kiểm thử được ghi nhận.
 
 ### 1.2. Mục tiêu và phạm vi
 
@@ -99,7 +97,7 @@ Controller tiếp nhận và trả lời HTTP. Repository truy vấn SQL và th�
 
 ### 2.2. Thiết kế cơ sở dữ liệu
 
-Database web **`QuanLyKinhMatWeb`** tách khỏi database WinForms **`QuanLyKinhMat`**. Bộ schema được chuyển từ dump SQL đã cung cấp, giữ 21 bảng và thêm `WebUsers`, thành 22 bảng; bổ sung `KhachHang.GhiChu`. SQL đóng gói có ba tài khoản mã nhân viên bằng PasswordHash, không seed demo.
+Database web **`QuanLyKinhMatWeb`** tách khỏi database WinForms **`QuanLyKinhMat`**. Bộ schema được chuyển từ dump SQL đã cung cấp, giữ 21 bảng và thêm `WebUsers`, thành 22 bảng; bổ sung `KhachHang.GhiChu`. SQL đóng gói có ba tài khoản mã nhân viên bằng PasswordHash, không tạo thêm tài khoản khi khởi động lại.
 
 | Nhóm | Các bảng | Số lượng |
 |---|---|---:|
@@ -128,7 +126,7 @@ erDiagram
 
 `WebUsers` chứa mã tài khoản, `EmployeeId`, tên đăng nhập/hiển thị, hash, vai trò, trạng thái, `SecurityStamp`. Mã nhân viên và tên đăng nhập có ràng buộc duy nhất; vai trò giới hạn Admin/Staff. Seed web loại mật khẩu cũ trong `NhanVien`, vô hiệu hóa `TaiKhoan`; xác thực chỉ dùng `WebUsers.PasswordHash`.
 
-Bổ sung theo dữ liệu đăng nhập thực tế: công cụ `Import-EmployeeLogins.ps1` chỉ đọc `NhanVien` gốc, đưa mã `1`/`2`/`3` và mật khẩu cũ sang `WebUsers` bằng PasswordHasher. Không sửa database gốc, không lưu lại mật khẩu văn bản trong bản web và không reset tài khoản khi chạy lại. Mã `1` là Admin, `2`/`3` là Staff. [employee-login-check.json](employee-login-check.json) ghi 26 kiểm tra đạt ở lượt mới cho đăng nhập/quyền/đăng xuất; hai tài khoản demo đã bị xóa, không tự tạo lại. SQL nộp kèm đủ ba hash nên không cần database gốc trên máy chấm bài.
+Công cụ chuyển đổi tài khoản `Import-EmployeeLogins.ps1` chỉ đọc `NhanVien` gốc, đưa mã `1`/`2`/`3` và mật khẩu cũ sang `WebUsers` bằng PasswordHasher. Không sửa database gốc, không lưu lại mật khẩu văn bản trong bản web và không reset tài khoản khi chạy lại. Mã `1` là Admin, `2`/`3` là Staff. [employee-login-check.json](employee-login-check.json) ghi 26 kiểm tra đạt ở lượt mới cho đăng nhập/quyền/đăng xuất. SQL nộp kèm đủ ba hash nên không cần database gốc trên máy chấm bài.
 
 Các bảng thuộc tính cũ được giữ bảo toàn dữ liệu; giao diện CRUD hiện hỗ trợ năm nhóm: loại kính, thương hiệu, chất liệu, màu sắc, hình dáng. ERD đầy đủ và kiểu dữ liệu nằm trong [architecture.md](architecture.md), [schema SQL](../../QuanLyKinhMat.sql), [hướng dẫn database](database.md).
 
@@ -303,7 +301,7 @@ Ngoài 186 kiểm tra, **40/40 tổ hợp bố cục** của 10 màn hình tại
 
 186 là số kiểm tra/assertion trong các bộ thực thi, không đồng nghĩa 186 ca nghiệp vụ độc lập hoặc đã bao phủ mọi trạng thái có thể xảy ra.
 
-Bổ sung cho bộ nộp mới: sau khi xóa demo, bộ nghiệp vụ 55/55 đã chạy lại bằng mã nhân viên 1; bộ đăng nhập 26/26 xác nhận chỉ còn ba tài khoản, hai tên demo bị từ chối và quyền đúng. Các bộ khác trong bảng tổng hợp giữ bằng chứng lịch sử ở lượt trước; xem [submission-check.json](submission-check.json).
+Lượt xác nhận cuối của bộ nghiệp vụ đạt 55/55 bằng tài khoản quản lý `1`; bộ đăng nhập riêng đạt 26/26, xác nhận ba tài khoản nhân viên và quyền tương ứng. Các bộ khác trong bảng tổng hợp được ghi nhận ở các lượt chạy trước; xem [submission-check.json](submission-check.json).
 
 ### 4.3. Các kết quả quan trọng
 
@@ -357,7 +355,7 @@ Chưa chạy kiểm thử tải lớn, HTTPS công khai, nhiều máy chủ, m�
 
 Bản hiện tại dành cho học tập local: danh sách tải toàn bộ, session trong bộ nhớ, giao diện chỉ tiếng Việt, một số bảng thuộc tính chưa có CRUD riêng. Khóa chứng từ ưu tiên tính đúng và chưa đo hiệu năng ở quy mô lớn. Bản loopback dùng HTTP và cấu hình tin cậy chứng chỉ SQL phục vụ thực hành.
 
-Khảo sát, phân công và kết quả sử dụng ở cửa hàng phải do nhóm bổ sung. Không thay các nội dung đó bằng dữ liệu mẫu hay số liệu giả định; cũng không suy từ việc có mã bảo mật sang kết luận đã đạt yêu cầu triển khai công khai.
+Kết quả đánh giá giới hạn ở dữ liệu mẫu và môi trường kiểm thử cục bộ; chưa đánh giá vận hành tại cửa hàng thực tế hoặc triển khai công khai.
 
 ### 5.3. Hướng phát triển
 
@@ -369,13 +367,13 @@ Khảo sát, phân công và kết quả sử dụng ở cửa hàng phải do n
 
 | Thành phần | Tài liệu/vị trí |
 |---|---|
-| Cài đặt, cấu hình, chạy và xử lý lỗi | [README](../README.md) |
+| Cài đặt, cấu hình, chạy và xử lý lỗi | [Cài đặt và sử dụng](../../CAI_DAT_VA_SU_DUNG.md) |
 | Kiến trúc, use-case, ERD | [architecture.md](architecture.md) |
 | Sitemap và wireframe | [wireframes.md](wireframes.md) |
 | Danh mục test và kết quả thực tế | [test-cases.md](test-cases.md), [verification.md](verification.md), [test-results.json](test-results.json) |
 | Schema, dữ liệu và quy tắc khởi tạo | [Hướng dẫn database](database.md), [SQL](../../QuanLyKinhMat.sql) |
 | Ảnh chạy thực tế | `docs/screenshots/` |
 | Mã nguồn | [WebQuanLyKinhMat.csproj](../WebQuanLyKinhMat.csproj), `Controllers`, `Models`, `Data`, `Services`, `Views`, `wwwroot` |
-| Công cụ và bản chạy | `CHAY-WEB.cmd`, `TAT-WEB.cmd`, `scripts/` (bản Git build từ source) |
+| Công cụ và bản chạy | `CHAY-WEB.cmd`, `TAT-WEB.cmd`, `scripts/` (biên dịch từ mã nguồn) |
 
-Cơ sở báo cáo là hướng dẫn học phần đã cung cấp, mã nguồn, schema và artifact kiểm thử. Những vị trí **[Cần bổ sung]** dành cho thông tin cá nhân/nhóm và khảo sát thực tế cần được hoàn thiện trước khi nộp.
+Cơ sở báo cáo gồm yêu cầu học phần, mã nguồn, schema SQL và các kết quả kiểm thử được lưu trong project.

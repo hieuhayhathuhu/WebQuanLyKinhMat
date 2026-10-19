@@ -4,7 +4,7 @@
 
 Ứng dụng phục vụ quản trị và nhân viên của cửa hàng kính mắt trên trình duyệt. Các nhóm chức năng gồm tổng quan, sản phẩm, khách hàng, nhà cung cấp, danh mục, nhập hàng, bán hàng, chứng từ, báo cáo và tài khoản.
 
-Đây là ứng dụng ASP.NET Core MVC với Razor cho trang khung/đăng nhập và JavaScript gọi API bằng `fetch` cho các form nghiệp vụ. Dữ liệu lưu ở SQL Server qua `Microsoft.Data.SqlClient`; dùng SQL có tham số. EF là một hướng được dạy trong tài liệu tham khảo, không phải điều khoản bắt buộc riêng trong đề BTL.
+Đây là ứng dụng ASP.NET Core MVC với Razor cho trang khung/đăng nhập và JavaScript gọi API bằng `fetch` cho các form nghiệp vụ. Dữ liệu lưu ở SQL Server qua `Microsoft.Data.SqlClient`; dùng SQL có tham số.
 
 ```mermaid
 flowchart LR
@@ -28,13 +28,13 @@ Các thư mục chính:
 | `Services` | Phát hành danh tính đăng nhập và dữ liệu HTTP session theo người dùng. |
 | `Views` | Razor View trang đăng nhập và trang ứng dụng. |
 | `wwwroot` | HTML/CSS/JavaScript và tài nguyên giao diện được trình duyệt tải. |
-| `database`, `scripts` | Bộ khởi tạo database mới và dữ liệu đã loại mật khẩu cũ. |
+| `scripts` và `QuanLyKinhMat.sql` ngoài cùng | Công cụ khởi tạo database và bộ schema/dữ liệu mẫu. |
 
 ## Các lớp người dùng và use-case
 
 Vai trò `Admin` và `Staff` được lưu ở `WebUsers`, không suy ra từ tên hiển thị hoặc dữ liệu client. Quản lý người dùng là quyền của Admin; mỗi người đã đăng nhập được đổi mật khẩu của chính mình.
 
-Bản nộp chỉ có ba tài khoản theo mã nhân viên `1`, `2`, `3`; mã `1` là Admin, hai mã còn lại là Staff. Hai tài khoản demo đã xóa và mã bootstrap đã gỡ. SQL khởi tạo chứa đủ ba PasswordHash nên máy cài mới không cần database WinForms gốc.
+Bản nộp chỉ có ba tài khoản theo mã nhân viên `1`, `2`, `3`; mã `1` là Admin, hai mã còn lại là Staff. SQL khởi tạo chứa đủ ba PasswordHash nên máy cài mới không cần database WinForms gốc.
 
 ```mermaid
 flowchart LR

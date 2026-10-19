@@ -63,5 +63,5 @@ for ($attempt = 0; $attempt -lt 40; $attempt++) {
 }
 if (-not $started) { throw "Chua khoi dong duoc ung dung. Xem App_Data\server.log va server-error.log trong $projectRoot" }
 Write-Host "Da khoi dong: $url"
-Write-Host 'Dang nhap bang ma nhan vien va mat khau cu trong SQL (sau khi chuyen tai khoan). Xem README.md va CAI_DAT_VA_SU_DUNG.md o thu muc Git ngoai cung.'
+Write-Host 'Dang nhap bang tai khoan web trong bo du lieu mau. Xem README.md va CAI_DAT_VA_SU_DUNG.md o thu muc ngoai cung.'
 if (-not $NoBrowser) { Start-Process $url }

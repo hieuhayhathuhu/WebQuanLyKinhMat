@@ -14,7 +14,7 @@
 | `2` | `hieucoi12345` | Nhân viên (`Staff`) |
 | `3` | `hieucoi12345` | Nhân viên (`Staff`) |
 
-Tên đăng nhập ban đầu trùng mã nhân viên. Tài khoản `2` và `3` cùng quyền `Staff`. Đây là tài khoản **web**; kết nối SQL Server dùng Windows Authentication. Mật khẩu lưu dạng băm trong `WebUsers`; nếu đã đổi thì dùng mật khẩu mới. Hai tài khoản demo `admin`, `nhanvien` đã được bỏ.
+Tên đăng nhập ban đầu trùng mã nhân viên. Tài khoản `2` và `3` cùng quyền `Staff`. Đây là tài khoản **web**; kết nối SQL Server dùng Windows Authentication. Mật khẩu lưu dạng băm trong `WebUsers`; nếu đã đổi thì dùng mật khẩu mới.
 
 ## 2. Khởi chạy dự án
 
@@ -66,7 +66,7 @@ Các ca dưới đây tóm tắt kết quả đã ghi nhận ngày **19/10/2026*
 | TC13 | Xuất CSV tiếng Việt | Tên chứa dấu, dấu phẩy/nháy và số tiền `123456.78` | Giữ đúng nội dung và số tiền | CSV có BOM UTF-8; giữ Unicode, ký tự và số lẻ | PASS |
 | TC14 | Giao diện trên nhiều kích thước | 10 màn hình tại 320, 390, 768 và 1440px | Không tràn chiều rộng trang; bảng cuộn trong khung | 40/40 tổ hợp bố cục đạt | PASS |
 
-**Tổng hợp đã lưu:** 186/186 kiểm tra chức năng/hồi quy và 40/40 bố cục. Sau khi bỏ tài khoản demo, bộ nghiệp vụ được chạy lại đạt 55/55; lượt riêng kiểm tra ba tài khoản nhân viên đạt 26/26. Các bộ khác giữ kết quả của những lượt trước. Bản solution theo tên hiện tại đã build với 0 lỗi, 0 cảnh báo.
+**Kết quả kiểm thử:** 186/186 kiểm tra chức năng/hồi quy và 40/40 bố cục, tổng hợp từ các lượt chạy của từng bộ. Lượt xác nhận cuối của bộ nghiệp vụ đạt 55/55; bộ kiểm tra ba tài khoản nhân viên đạt 26/26 và được lưu riêng. Solution biên dịch thành công với 0 lỗi, 0 cảnh báo.
 
 Bằng chứng: [test-results.json](WebQuanLyKinhMat/docs/test-results.json), [employee-login-check.json](WebQuanLyKinhMat/docs/employee-login-check.json), [submission-check.json](WebQuanLyKinhMat/docs/submission-check.json), [github-ready.json](WebQuanLyKinhMat/docs/github-ready.json). Xem [toàn bộ ca kiểm thử](WebQuanLyKinhMat/docs/test-cases.md) và [thuyết minh kết quả](WebQuanLyKinhMat/docs/verification.md) khi cần đối chiếu.
 
@@ -84,9 +84,7 @@ WebQuanLyKinhMat/
 
 File SQL được runner nạp vào database **`QuanLyKinhMatWeb`**. Bộ dữ liệu có 22 bảng; máy cài mới không cần database WinForms gốc. Giỏ chưa lưu chỉ giữ trong trang đang mở, tải lại trang sẽ mất giỏ. Ứng dụng đã kiểm tra trong môi trường local; phạm vi kiểm thử được ghi trong tài liệu kết quả.
 
-- [Cài đặt, chạy và nộp GitHub](CAI_DAT_VA_SU_DUNG.md).
-- [Báo cáo bài tập lớn](WebQuanLyKinhMat/docs/report.md).
+- [Cài đặt và sử dụng](CAI_DAT_VA_SU_DUNG.md).
+- [Báo cáo kỹ thuật](WebQuanLyKinhMat/docs/report.md).
 - [Kiến trúc ứng dụng](WebQuanLyKinhMat/docs/architecture.md) · [Thiết kế database](WebQuanLyKinhMat/docs/database.md).
 - [Thiết kế giao diện](WebQuanLyKinhMat/docs/wireframes.md).
-
-Thông tin trường, lớp, giảng viên, thành viên và khảo sát thực tế trong báo cáo cần được nhóm bổ sung trước khi nộp.

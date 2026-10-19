@@ -20,11 +20,11 @@ Trong chính các câu seed của bản SQL mới:
 - Các giá trị mật khẩu cũ không được giữ rồi mới xóa sau khi import.
 - Ứng dụng web chỉ xác thực bằng `WebUsers.PasswordHash`; không dùng hai nguồn mật khẩu cũ.
 
-`WebUsers` có khóa chính identity `Id`, khóa ngoại `EmployeeId` duy nhất tới `NhanVien`, `UserName` duy nhất, `PasswordHash`, `DisplayName`, `Role` (`Admin`/`Staff`), `IsActive`, `SecurityStamp` và `CreatedAt`. Script SQL có ba tài khoản mã nhân viên `1`/`2`/`3` bằng `PasswordHash`, không chứa mật khẩu văn bản. Ứng dụng không tạo tài khoản demo.
+`WebUsers` có khóa chính identity `Id`, khóa ngoại `EmployeeId` duy nhất tới `NhanVien`, `UserName` duy nhất, `PasswordHash`, `DisplayName`, `Role` (`Admin`/`Staff`), `IsActive`, `SecurityStamp` và `CreatedAt`. Script SQL có ba tài khoản mã nhân viên `1`/`2`/`3` bằng `PasswordHash`, không chứa mật khẩu văn bản.
 
 ## Tài khoản trong bộ nộp
 
-SQL đã kèm đủ ba tài khoản: mã `1` là Admin; mã `2`, `3` là Staff. Người dùng nhập mã nhân viên và mật khẩu đã cung cấp cho bản chạy. Hash được tạo bằng ASP.NET PasswordHasher, không dùng cột Passw để xác thực web. Hai tài khoản demo đã xóa và không được seed lại.
+SQL đã kèm đủ ba tài khoản: mã `1` là Admin; mã `2`, `3` là Staff. Người dùng nhập mã nhân viên và mật khẩu đã cung cấp cho bản chạy. Hash được tạo bằng ASP.NET PasswordHasher, không dùng cột Passw để xác thực web. Thông tin đăng nhập mẫu nằm trong [README](../../README.md#1-tài-khoản-đăng-nhập).
 
 Máy mới chỉ cần SQL Server, bộ SQL và runner đi kèm; không cần `QuanLyKinhMat` gốc. `scripts/Import-EmployeeLogins.ps1` là công cụ chuyển tùy chọn từ bản gốc khi cần, không phải bước dựng bộ nộp. Công cụ chỉ đọc nguồn, không reset tài khoản đã có; gặp hash PBKDF2 cũ sẽ dừng để chuyển bằng xác minh mật khẩu.
 
@@ -66,7 +66,7 @@ SELECT COL_LENGTH('dbo.KhachHang','GhiChu') AS NoteColumnBytes;
 SELECT COUNT(*) AS WebAccountCount FROM dbo.WebUsers;
 ```
 
-Kỳ vọng: database đúng tên, 22 bảng, hai số đếm mật khẩu/tài khoản cũ bằng 0, hai filtered index có điều kiện `TokenLuu IS NOT NULL`, ghi chú có kích thước 1000 byte (500 ký tự Unicode). `WebUsers` có ba tài khoản mã nhân viên ngay sau khởi tạo; khởi động lại không tạo thêm demo.
+Kỳ vọng: database đúng tên, 22 bảng, hai số đếm mật khẩu/tài khoản cũ bằng 0, hai filtered index có điều kiện `TokenLuu IS NOT NULL`, ghi chú có kích thước 1000 byte (500 ký tự Unicode). `WebUsers` có ba tài khoản mã nhân viên ngay sau khởi tạo; khởi động lại không tự tạo thêm tài khoản.
 
 Không xuất `PasswordHash` hoặc dữ liệu cá nhân để chứng minh kết quả. Database WinForms gốc không nằm trong chuỗi kết nối của runner ở bất kỳ bước import nào.
 
