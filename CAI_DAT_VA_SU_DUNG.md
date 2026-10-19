@@ -59,13 +59,15 @@ Log của phiên chạy nhanh nằm tại `WebQuanLyKinhMat/App_Data/server.log`
 
 ## 6. Đưa lên GitHub
 
-Thư mục hiện tại đã có Git và nhánh `main`. Tạo repository trống trên GitHub; mở PowerShell tại **thư mục ngoài cùng chứa `.slnx`** rồi chạy:
+Thư mục hiện tại đã có Git và nhánh `main`. Trên GitHub, chọn **New repository**, Owner **`hieuhayhathuhu`**, tên **`WebQuanLyKinhMat`**; chọn chế độ hiển thị theo yêu cầu nộp bài. Để trống phần tạo README, `.gitignore` và license rồi bấm **Create repository**.
+
+Mở PowerShell tại **thư mục ngoài cùng chứa `.slnx`** rồi chạy:
 
 ```powershell
-git remote add origin https://github.com/TEN_TAI_KHOAN/WebQuanLyKinhMat.git
+git remote add origin https://github.com/hieuhayhathuhu/WebQuanLyKinhMat.git
 git push -u origin main
 ```
 
-Thay `TEN_TAI_KHOAN` bằng tài khoản của bạn. Nếu đã có `origin`, kiểm tra `git remote -v` và dùng `git remote set-url origin <URL_repo_cua_ban>` khi cần đổi. Với thay đổi mới, chạy `git add .`, `git commit -m "Cap nhat du an"` rồi `git push`.
+Nếu đã có `origin`, kiểm tra `git remote -v`; khi cần đổi địa chỉ, dùng `git remote set-url origin https://github.com/hieuhayhathuhu/WebQuanLyKinhMat.git` thay cho lệnh `remote add`. Với thay đổi mới, chạy `git add .`, `git commit -m "Cap nhat du an"` rồi `git push`.
 
 Kiểm tra trên GitHub có đủ thư mục project, `.slnx`, SQL và hai file Markdown rồi gửi link nộp bài. `.gitignore` đã loại `bin`, `obj`, `runtime`, `.vs`, log và cấu hình riêng.
