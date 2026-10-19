@@ -375,7 +375,7 @@ Khảo sát, phân công và kết quả sử dụng ở cửa hàng phải do n
 | Danh mục test và kết quả thực tế | [test-cases.md](test-cases.md), [verification.md](verification.md), [test-results.json](test-results.json) |
 | Schema, dữ liệu và quy tắc khởi tạo | [Hướng dẫn database](database.md), [SQL](../../QuanLyKinhMat.sql) |
 | Ảnh chạy thực tế | `docs/screenshots/` |
-| Mã nguồn | [QuanLyKinhMatWeb.csproj](../QuanLyKinhMatWeb.csproj), `Controllers`, `Models`, `Data`, `Services`, `Views`, `wwwroot` |
+| Mã nguồn | [WebQuanLyKinhMat.csproj](../WebQuanLyKinhMat.csproj), `Controllers`, `Models`, `Data`, `Services`, `Views`, `wwwroot` |
 | Công cụ và bản chạy | `CHAY-WEB.cmd`, `TAT-WEB.cmd`, `scripts/` (bản Git build từ source) |
 
 Cơ sở báo cáo là hướng dẫn học phần đã cung cấp, mã nguồn, schema và artifact kiểm thử. Những vị trí **[Cần bổ sung]** dành cho thông tin cá nhân/nhóm và khảo sát thực tế cần được hoàn thiện trước khi nộp.

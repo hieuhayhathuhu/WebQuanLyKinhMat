@@ -1,19 +1,19 @@
-# Hướng dẫn dự án bài tập lớn
+# Cài đặt và sử dụng WebQuanLyKinhMat
 
 ## Mở bằng Visual Studio
 
-Mở `QuanLyKinhMatWeb.slnx` ở ngoài cùng. Source nằm trong `QuanLyKinhMatWeb/QuanLyKinhMatWeb.csproj`, target `net10.0`. Chọn project web làm Startup Project.
+Mở `WebQuanLyKinhMat.slnx` ở ngoài cùng. Source nằm trong `WebQuanLyKinhMat/WebQuanLyKinhMat.csproj`, target `net10.0`. Chọn project web làm Startup Project.
 
-Nếu chỉ muốn chạy, mở thư mục `QuanLyKinhMatWeb` rồi dùng `CHAY-WEB.cmd` bên trong. File chạy sẽ tạo database mới khi chưa có, build source và mở trình duyệt. Bản Git không chứa thư viện biên dịch/runtime có sẵn.
+Nếu chỉ muốn chạy, mở thư mục `WebQuanLyKinhMat` rồi dùng `CHAY-WEB.cmd` bên trong. File chạy sẽ tạo database mới khi chưa có, build source và mở trình duyệt. Bản Git không chứa thư viện biên dịch/runtime có sẵn.
 
 ## Database
 
-SQL nằm ở ngoài cùng: `QuanLyKinhMat.sql`, gồm schema, dữ liệu và ba tài khoản hash. Đổi Server trong `QuanLyKinhMatWeb/appsettings.json` cho đúng máy; launcher và server cùng đọc cấu hình này. Có thể tạo `appsettings.Local.json` trong project để ghi cấu hình riêng; file đó đã được Git bỏ qua.
+SQL nằm ở ngoài cùng: `QuanLyKinhMat.sql`, gồm schema, dữ liệu và ba tài khoản hash. Đổi Server trong `WebQuanLyKinhMat/appsettings.json` cho đúng máy; launcher và server cùng đọc cấu hình này. Có thể tạo `appsettings.Local.json` trong project để ghi cấu hình riêng; file đó đã được Git bỏ qua.
 
 Bộ SQL có guard và dùng runner để khởi tạo an toàn. Không cần chạy trực tiếp bằng F5 trong SSMS. Nếu muốn khởi tạo riêng:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\QuanLyKinhMatWeb\scripts\Initialize-Database.ps1 -Server '.\SQLEXPRESS'
+powershell -NoProfile -ExecutionPolicy Bypass -File .\WebQuanLyKinhMat\scripts\Initialize-Database.ps1 -Server '.\SQLEXPRESS'
 ```
 
 Đổi tên server cho đúng instance. Nếu DB web đã tồn tại, script dừng và không ghi đè. Database gốc WinForms không bị sửa.
@@ -23,24 +23,24 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\QuanLyKinhMatWeb\scripts\I
 Tại thư mục chứa solution:
 
 ```powershell
-dotnet restore QuanLyKinhMatWeb.slnx
-dotnet build QuanLyKinhMatWeb.slnx
-dotnet run --project QuanLyKinhMatWeb/QuanLyKinhMatWeb.csproj --urls http://127.0.0.1:5080
+dotnet restore WebQuanLyKinhMat.slnx
+dotnet build WebQuanLyKinhMat.slnx
+dotnet run --project WebQuanLyKinhMat/WebQuanLyKinhMat.csproj --urls http://127.0.0.1:5080
 ```
 
-Dùng Ctrl+C để dừng phiên chạy từ Terminal. Dùng `QuanLyKinhMatWeb/TAT-WEB.cmd` cho phiên chạy bằng launcher.
+Dùng Ctrl+C để dừng phiên chạy từ Terminal. Dùng `WebQuanLyKinhMat/TAT-WEB.cmd` cho phiên chạy bằng launcher.
 
 ## Đưa thư mục này lên GitHub
 
 Thư mục này là repository Git cục bộ. Không gắn với repo của nhóm mẫu và chưa tự gửi mã nguồn lên tài khoản GitHub nào.
 
-1. Tạo một repository trống trong tài khoản GitHub của bạn, ví dụ `QuanLyKinhMatWeb`. Không chọn tạo README/gitignore mới nếu đã có các file tại máy.
+1. Tạo một repository trống trong tài khoản GitHub của bạn, ví dụ `WebQuanLyKinhMat`. Không chọn tạo README/gitignore mới nếu đã có các file tại máy.
 2. Mở Terminal tại thư mục này.
 3. Kiểm tra `git status` và commit nếu chưa có commit.
 4. Gắn đúng link repo của bạn rồi push:
 
 ```powershell
-git remote add origin https://github.com/TEN_TAI_KHOAN/QuanLyKinhMatWeb.git
+git remote add origin https://github.com/TEN_TAI_KHOAN/WebQuanLyKinhMat.git
 git push -u origin main
 ```
 

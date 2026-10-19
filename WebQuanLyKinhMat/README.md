@@ -14,14 +14,14 @@ Trên máy hiện tại đã có database riêng và đã chuyển tài khoản 
 
 ## 1. Chuẩn bị
 
-- Windows, .NET 10 SDK và SQL Server đang chạy. Project khai báo `net10.0` trong `QuanLyKinhMatWeb.csproj`.
+- Windows, .NET 10 SDK và SQL Server đang chạy. Project khai báo `net10.0` trong `WebQuanLyKinhMat.csproj`.
 - Tài khoản Windows chạy bước khởi tạo có quyền tạo database trên SQL Server.
 - Mặc định SQL Server là `HIEUCOI\SQLEXPRESS`, dùng Windows Authentication. Không cần đặt mật khẩu SQL vào JavaScript.
-- Có thể mở `QuanLyKinhMatWeb.csproj` bằng Visual Studio có công cụ phát triển ASP.NET; hoặc dùng các lệnh `dotnet` bên dưới.
+- Có thể mở `WebQuanLyKinhMat.csproj` bằng Visual Studio có công cụ phát triển ASP.NET; hoặc dùng các lệnh `dotnet` bên dưới.
 
 ## 2. Tạo database riêng
 
-Mở PowerShell tại thư mục chứa `QuanLyKinhMatWeb.csproj`:
+Mở PowerShell tại thư mục chứa `WebQuanLyKinhMat.csproj`:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Initialize-Database.ps1

@@ -91,7 +91,7 @@ async function anonymousHome(context) {
     const target = new URL(base);
     check('Test target is a local server', ['localhost', '127.0.0.1', '[::1]'].includes(target.hostname));
     const settings = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../appsettings.json'), 'utf8').replace(/^\uFEFF/, ''));
-    check('Project configuration targets the separate test copy', /(?:^|;)\s*(?:Database|Initial Catalog)\s*=\s*QuanLyKinhMatWeb\s*(?:;|$)/i.test(settings.ConnectionStrings?.Store || ''));
+    check('Project configuration targets the separate test copy', /(?:^|;)\s*(?:Database|Initial Catalog)\s*=\s*WebQuanLyKinhMat\s*(?:;|$)/i.test(settings.ConnectionStrings?.Store || ''));
     browser = await chromium.launch({ headless: true, channel: 'msedge' });
     const anonymous = await browser.newContext();
     check('AU03 Anonymous home redirects to local login', await anonymousHome(anonymous));

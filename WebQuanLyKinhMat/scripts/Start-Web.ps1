@@ -43,7 +43,7 @@ $dll = Join-Path $projectRoot 'runtime\KinhMat.Web.dll'
 if (-not (Test-Path -LiteralPath $dll)) {
     Push-Location $projectRoot
     try {
-        & $dotnetCommand.Source build QuanLyKinhMatWeb.csproj -c Release -p:UseSharedCompilation=false -nr:false
+        & $dotnetCommand.Source build WebQuanLyKinhMat.csproj -c Release -p:UseSharedCompilation=false -nr:false
         if ($LASTEXITCODE -ne 0) { throw 'Bien dich that bai. Kiem tra .NET SDK va ket noi NuGet.' }
     } finally { Pop-Location }
     $dll = Join-Path $projectRoot 'bin\Release\net10.0\KinhMat.Web.dll'
@@ -63,5 +63,5 @@ for ($attempt = 0; $attempt -lt 40; $attempt++) {
 }
 if (-not $started) { throw "Chua khoi dong duoc ung dung. Xem App_Data\server.log va server-error.log trong $projectRoot" }
 Write-Host "Da khoi dong: $url"
-Write-Host 'Dang nhap bang ma nhan vien va mat khau cu trong SQL (sau khi chuyen tai khoan). Xem README.md va HUONG_DAN_DU_AN_BTL.md o thu muc Git ngoai cung.'
+Write-Host 'Dang nhap bang ma nhan vien va mat khau cu trong SQL (sau khi chuyen tai khoan). Xem README.md va CAI_DAT_VA_SU_DUNG.md o thu muc Git ngoai cung.'
 if (-not $NoBrowser) { Start-Process $url }

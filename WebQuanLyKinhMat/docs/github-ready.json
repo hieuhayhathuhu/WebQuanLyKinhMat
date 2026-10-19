@@ -1,8 +1,8 @@
 {
   "recordedAt": "2026-10-19T17:09:03.812439+00:00",
   "layoutReference": "https://github.com/binhminh1201/QuanLyBanTuBepWeb",
-  "solution": "QuanLyKinhMatWeb.slnx",
-  "project": "QuanLyKinhMatWeb/QuanLyKinhMatWeb.csproj",
+  "solution": "WebQuanLyKinhMat.slnx",
+  "project": "WebQuanLyKinhMat/WebQuanLyKinhMat.csproj",
   "sql": "QuanLyKinhMat.sql",
   "sourceBuild": {
     "errors": 0,
@@ -24,11 +24,12 @@
   },
   "gitHubUploadPerformed": false,
   "rootLayout": [
-    "QuanLyKinhMatWeb/",
+    "WebQuanLyKinhMat/",
     ".gitignore",
-    "HUONG_DAN_DU_AN_BTL.md",
+    "CAI_DAT_VA_SU_DUNG.md",
     "QuanLyKinhMat.sql",
-    "QuanLyKinhMatWeb.slnx",
+    "WebQuanLyKinhMat.slnx",
     "README.md"
-  ]
+  ],
+  "renamedAt": "2026-10-19T17:16:27.830637+00:00"
 }

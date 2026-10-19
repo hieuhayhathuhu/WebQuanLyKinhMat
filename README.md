@@ -1,16 +1,16 @@
-# Quản lý cửa hàng kính mắt
+# WebQuanLyKinhMat
 
 Bài tập lớn môn Lập trình web: ASP.NET Core MVC, C#, Razor, JavaScript và SQL Server. Mã nguồn được tổ chức để mở bằng Visual Studio và nộp trên GitHub.
 
 ## Cấu trúc repository
 
 ```text
-QuanLyKinhMatWeb_GitHub/
-├── QuanLyKinhMatWeb/
+WebQuanLyKinhMat/
+├── WebQuanLyKinhMat/
 ├── .gitignore
-├── HUONG_DAN_DU_AN_BTL.md
+├── CAI_DAT_VA_SU_DUNG.md
 ├── QuanLyKinhMat.sql
-├── QuanLyKinhMatWeb.slnx
+├── WebQuanLyKinhMat.slnx
 └── README.md
 ```
 
@@ -26,13 +26,13 @@ QuanLyKinhMatWeb_GitHub/
 ## Chạy dự án
 
 1. Cài .NET 10 SDK và SQL Server.
-2. Sửa tên `Server` trong `QuanLyKinhMatWeb/appsettings.json` cho đúng instance của máy. Giữ `Database=QuanLyKinhMatWeb` và Windows Authentication.
-3. Mở thư mục `QuanLyKinhMatWeb`, nhấp đúp **CHAY-WEB.cmd** bên trong. Bản Git chứa source; lần đầu launcher build project rồi mở http://127.0.0.1:5080.
+2. Sửa tên `Server` trong `WebQuanLyKinhMat/appsettings.json` cho đúng instance của máy. Giữ `Database=QuanLyKinhMatWeb` và Windows Authentication.
+3. Mở thư mục `WebQuanLyKinhMat`, nhấp đúp **CHAY-WEB.cmd** bên trong. Bản Git chứa source; lần đầu launcher build project rồi mở http://127.0.0.1:5080.
 4. Dừng bằng **TAT-WEB.cmd** trong cùng thư mục project.
 
 Khi database web chưa có, launcher tạo bằng `QuanLyKinhMat.sql`; tài khoản Windows cần quyền tạo database. Database đã có không bị ghi đè. Máy chấm bài không cần database WinForms gốc.
 
-Mở source bằng **QuanLyKinhMatWeb.slnx**, chọn project web rồi chạy trong Visual Studio. Chi tiết xem [hướng dẫn dự án](HUONG_DAN_DU_AN_BTL.md).
+Mở source bằng **WebQuanLyKinhMat.slnx**, chọn project web rồi chạy trong Visual Studio. Chi tiết xem [hướng dẫn dự án](CAI_DAT_VA_SU_DUNG.md).
 
 ## Tài khoản bài thực hành
 
@@ -46,11 +46,11 @@ Hai tài khoản demo `admin`, `nhanvien` đã xóa và không tự tạo lại.
 
 ## Tài liệu và giao diện
 
-- [Báo cáo kỹ thuật](QuanLyKinhMatWeb/docs/report.md).
-- [Kiến trúc và thiết kế dữ liệu](QuanLyKinhMatWeb/docs/architecture.md).
-- [Kết quả kiểm thử](QuanLyKinhMatWeb/docs/verification.md).
-- [Hướng dẫn đưa lên GitHub](HUONG_DAN_DU_AN_BTL.md#đưa-thư-mục-này-lên-github).
+- [Báo cáo kỹ thuật](WebQuanLyKinhMat/docs/report.md).
+- [Kiến trúc và thiết kế dữ liệu](WebQuanLyKinhMat/docs/architecture.md).
+- [Kết quả kiểm thử](WebQuanLyKinhMat/docs/verification.md).
+- [Hướng dẫn đưa lên GitHub](CAI_DAT_VA_SU_DUNG.md#đưa-thư-mục-này-lên-github).
 
-![Giao diện sản phẩm](QuanLyKinhMatWeb/docs/screenshots/products-desktop.png)
+![Giao diện sản phẩm](WebQuanLyKinhMat/docs/screenshots/products-desktop.png)
 
 Thông tin trường, lớp, thành viên và khảo sát thực tế trong báo cáo cần được nhóm bổ sung trước khi nộp.
