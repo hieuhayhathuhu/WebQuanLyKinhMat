@@ -23,6 +23,16 @@ SQL khởi tạo chứa schema/dữ liệu và 3 PasswordHash. Lượt trước 
 
 Bằng chứng: [startup-check.json](startup-check.json). Không cộng các kiểm tra này vào tổng 186 của các lượt trước. Đường chạy Visual Studio được cấu hình trong `Properties/launchSettings.json`; lượt xác nhận mới dùng .NET CLI.
 
+## Phiên đăng nhập sau khi khởi động lại ngày 20/10/2026
+
+Kiểm tra riêng đạt **20/20** bằng HTTP qua hai tiến trình ứng dụng thật, dùng cùng thư mục nội dung và cùng khóa Data Protection:
+
+- Không chọn giữ đăng nhập: vẫn dùng được trong lần chạy hiện tại; sau khi dừng/chạy lại, API trả 401 và trang chính chuyển về đăng nhập.
+- Có chọn giữ đăng nhập: tiếp tục dùng được sau khi chạy lại; nhân viên vẫn nhận 403 khi gọi API quản lý tài khoản.
+- Đăng nhập lại, tải lại trang trong cùng lần chạy và đăng xuất với CSRF hợp lệ đều hoạt động đúng. Sau đăng xuất, API trả 401.
+
+Release build đạt 0 lỗi, 0 cảnh báo. Các kiểm tra chỉ đăng nhập, đọc dữ liệu và đăng xuất; không ghi dữ liệu nghiệp vụ. Xem [login-restart-check.json](login-restart-check.json). Kết quả này được ghi riêng, không cộng vào tổng 186 của các lượt trước.
+
 ## Biên dịch và kết nối
 
 - Release build thành công: 0 lỗi, 0 cảnh báo.

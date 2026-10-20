@@ -241,7 +241,7 @@ Retry cùng token/nội dung trả chứng từ cũ, không trừ tồn thêm; �
 
 ### 3.5. Session, cookies và annotation
 
-Cookie `KinhMat.Auth` chứa vé xác thực do ASP.NET bảo vệ, có `HttpOnly`, `SameSite=Lax`. Đăng nhập thường có thời hạn 8 giờ; ghi nhớ tạo cookie persistent với thời hạn 14 ngày. `KinhMat.Session` gắn với HTTP session lưu mã/tên nhân viên, idle timeout 8 giờ; bản local lưu session trong bộ nhớ tiến trình.
+Cookie `KinhMat.Auth` chứa vé xác thực do ASP.NET bảo vệ, có `HttpOnly`, `SameSite=Lax`. Đăng nhập thường có thời hạn 8 giờ trong cùng lần chạy ứng dụng và phải đăng nhập lại khi dừng/chạy lại dự án; ghi nhớ tạo cookie persistent với thời hạn 14 ngày, cho phép dùng tiếp qua các lần chạy. `KinhMat.Session` gắn với HTTP session lưu mã/tên nhân viên, idle timeout 8 giờ; bản local lưu session trong bộ nhớ tiến trình.
 
 Trạng thái tài khoản và `SecurityStamp` được kiểm tra khi xác thực cookie. Đổi mật khẩu cấp lại danh tính cho phiên thực hiện, làm cookie stamp cũ ở phiên khác mất hiệu lực. Khóa hoặc thay đổi quyền cũng làm cookie cũ không tiếp tục được tin cậy. Đăng xuất clear session/sign-out cookie; URL quay lại chỉ chấp nhận địa chỉ cục bộ.
 

@@ -35,6 +35,13 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.Events.OnRedirectToAccessDenied = context => { if (context.Request.Path.StartsWithSegments("/api")) context.Response.StatusCode = 403; else context.Response.Redirect(context.RedirectUri); return Task.CompletedTask; };
     options.Events.OnValidatePrincipal = async context =>
     {
+        if (!context.Properties.IsPersistent && !SessionIssuer.BelongsToCurrentRun(context.Principal))
+        {
+            context.RejectPrincipal();
+            context.HttpContext.Session.Clear();
+            await context.HttpContext.SignOutAsync();
+            return;
+        }
         var id = context.Principal?.FindFirstValue(ClaimTypes.NameIdentifier);
         var user = int.TryParse(id, out var userId) ? await context.HttpContext.RequestServices.GetRequiredService<AccountRepository>().FindAsync(userId) : null;
         if (user is null || !user.IsActive || user.SecurityStamp.ToString() != context.Principal?.FindFirstValue("stamp"))

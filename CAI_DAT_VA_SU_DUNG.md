@@ -29,4 +29,6 @@
 | `1` | `hieucoi12345` | Quản lý |
 | `2`, `3` | `hieucoi12345` | Nhân viên |
 
+Không tích **Giữ đăng nhập**: mỗi lần dừng và chạy lại dự án phải đăng nhập lại. Có tích: phiên đăng nhập được giữ qua các lần chạy.
+
 Nếu đã đổi mật khẩu, sử dụng mật khẩu mới. Các chức năng và kết quả kiểm thử xem tại [README](README.md).

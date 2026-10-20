@@ -1,0 +1,96 @@
+{
+  "clientDate": "2026-10-20",
+  "verifiedAt": "2026-10-20T02:30:18.1672489+00:00",
+  "method": "HTTP checks across two real application processes using the same content root and data protection keys",
+  "build": {
+    "configuration": "Release",
+    "errors": 0,
+    "warnings": 0
+  },
+  "total": 20,
+  "passed": 20,
+  "databaseBusinessWritesPerformed": false,
+  "credentialsAndCookiesRecorded": false,
+  "checks": [
+    {
+      "name": "Anonymous home redirects to login",
+      "pass": true
+    },
+    {
+      "name": "Anonymous product API returns 401",
+      "pass": true
+    },
+    {
+      "name": "Without remember option the cookie is not persistent",
+      "pass": true
+    },
+    {
+      "name": "Nonremembered admin works during the current run",
+      "pass": true
+    },
+    {
+      "name": "Nonremembered staff reads products during current run",
+      "pass": true
+    },
+    {
+      "name": "Nonremembered staff cannot administer accounts",
+      "pass": true
+    },
+    {
+      "name": "Remember option issues a persistent cookie",
+      "pass": true
+    },
+    {
+      "name": "Remembered admin works before restart",
+      "pass": true
+    },
+    {
+      "name": "Remembered staff works before restart",
+      "pass": true
+    },
+    {
+      "name": "Restart reuses the same data protection keys",
+      "pass": true
+    },
+    {
+      "name": "Nonremembered admin cookie is rejected after restart",
+      "pass": true
+    },
+    {
+      "name": "Nonremembered browser returns to login after restart",
+      "pass": true
+    },
+    {
+      "name": "Nonremembered staff cookie is rejected after restart",
+      "pass": true
+    },
+    {
+      "name": "Remembered admin stays signed in after restart",
+      "pass": true
+    },
+    {
+      "name": "Remembered staff stays signed in after restart",
+      "pass": true
+    },
+    {
+      "name": "Remembered staff remains forbidden from admin API",
+      "pass": true
+    },
+    {
+      "name": "Signing in again after restart succeeds",
+      "pass": true
+    },
+    {
+      "name": "Reload in the same run keeps the new login valid",
+      "pass": true
+    },
+    {
+      "name": "Remembered login can still log out with valid CSRF",
+      "pass": true
+    },
+    {
+      "name": "Logout removes access to protected API",
+      "pass": true
+    }
+  ]
+}

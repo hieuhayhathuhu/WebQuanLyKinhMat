@@ -14,6 +14,8 @@
 
 Tên đăng nhập ban đầu trùng mã nhân viên. Tài khoản `2` và `3` cùng quyền `Staff`. Đây là tài khoản **web**; kết nối SQL Server dùng Windows Authentication. Mật khẩu lưu dạng băm trong `WebUsers`; nếu đã đổi thì dùng mật khẩu mới.
 
+Không chọn **Giữ đăng nhập** thì phải đăng nhập lại sau mỗi lần dừng/chạy lại dự án. Chọn tùy chọn này để giữ phiên qua các lần chạy.
+
 ## 2. Khởi chạy dự án
 
 1. Chuẩn bị **.NET 10 SDK**, **SQL Server** và **SSMS**.
@@ -71,6 +73,8 @@ Các ca dưới đây tóm tắt kết quả đã ghi nhận ngày **19/10/2026*
 **Kết quả kiểm thử:** 186/186 kiểm tra chức năng/hồi quy và 40/40 bố cục, tổng hợp từ các lượt chạy của từng bộ. Lượt xác nhận cuối của bộ nghiệp vụ đạt 55/55; bộ kiểm tra ba tài khoản nhân viên đạt 26/26 và được lưu riêng. Solution biên dịch thành công với 0 lỗi, 0 cảnh báo.
 
 Bằng chứng: [test-results.json](WebQuanLyKinhMat/docs/test-results.json), [employee-login-check.json](WebQuanLyKinhMat/docs/employee-login-check.json), [submission-check.json](WebQuanLyKinhMat/docs/submission-check.json), [github-ready.json](WebQuanLyKinhMat/docs/github-ready.json). Xem [toàn bộ ca kiểm thử](WebQuanLyKinhMat/docs/test-cases.md) và [thuyết minh kết quả](WebQuanLyKinhMat/docs/verification.md) khi cần đối chiếu.
+
+Kiểm tra bổ sung ngày **20/10/2026**: hành vi giữ đăng nhập qua các lần chạy đạt **20/20**, xem [login-restart-check.json](WebQuanLyKinhMat/docs/login-restart-check.json).
 
 ## 5. Cấu trúc và tài liệu
 

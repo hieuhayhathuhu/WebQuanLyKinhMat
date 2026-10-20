@@ -212,6 +212,7 @@ Người lập chứng từ được lấy từ danh tính đã xác thực trê
 ## Security, session/cookies và quốc tế hóa
 
 - Đăng nhập phát hành cookie xác thực; HTTP session lưu thông tin gắn với phiên người dùng. `SecurityStamp` hỗ trợ kiểm tra hiệu lực danh tính sau thay đổi tài khoản/mật khẩu.
+- Phiên không chọn giữ đăng nhập có mã lần chạy được ký trong cookie; server từ chối cookie đó sau khi ứng dụng khởi động lại. Phiên có chọn giữ đăng nhập vẫn dùng được qua các lần chạy, nhưng luôn được kiểm tra trạng thái tài khoản và `SecurityStamp`.
 - Mật khẩu lưu bằng `PasswordHasher`; API trả thông tin tài khoản công khai cần thiết, không trả hash.
 - Kiểm tra quyền ở server; token chống CSRF cho các request thay đổi dữ liệu dùng cookie authentication.
 - Input model dùng annotation như `Required`, `StringLength`, `Range`, `EmailAddress`, `Compare`; repository kiểm tra bổ sung các quan hệ và nghiệp vụ mà annotation không biểu diễn đủ.
