@@ -25,7 +25,7 @@
             <form asp-controller="Account" asp-action="Login" method="post" class="login-form">
                 <input type="hidden" asp-for="ReturnUrl">
                 <div asp-validation-summary="All" class="login-errors" role="alert"></div>
-                <label>Mã nhân viên / tên đăng nhập<input asp-for="UserName" autocomplete="username" autofocus required maxlength="50" placeholder="Nhập mã nhân viên, ví dụ: 1"></label>
+                <label>Mã nhân viên / tên đăng nhập<input asp-for="UserName" autocomplete="username" autofocus required maxlength="50" placeholder="Nhập mã nhân viên"></label>
                 <label>Mật khẩu<input asp-for="Password" type="password" autocomplete="current-password" required maxlength="128" placeholder="Nhập mật khẩu"></label>
                 <label class="remember"><input asp-for="RememberMe" type="checkbox"> Giữ đăng nhập trên máy này</label>
                 <button type="submit" class="button primary">Đăng nhập <span aria-hidden="true">→</span></button>
