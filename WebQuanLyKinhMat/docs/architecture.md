@@ -28,7 +28,8 @@ Các thư mục chính:
 | `Services` | Phát hành danh tính đăng nhập và dữ liệu HTTP session theo người dùng. |
 | `Views` | Razor View trang đăng nhập và trang ứng dụng. |
 | `wwwroot` | HTML/CSS/JavaScript và tài nguyên giao diện được trình duyệt tải. |
-| `scripts` và `QuanLyKinhMat.sql` ngoài cùng | Công cụ khởi tạo database và bộ schema/dữ liệu mẫu. |
+| `QuanLyKinhMat.sql` ngoài cùng | Khởi tạo database và dữ liệu mẫu trực tiếp trong SSMS. |
+| `scripts` | Công cụ kiểm thử, đối chiếu dữ liệu và chuyển tài khoản. |
 
 ## Các lớp người dùng và use-case
 
@@ -231,6 +232,6 @@ Người lập chứng từ được lấy từ danh tính đã xác thực trê
 | Session, cookies, annotation | Đăng nhập, HTTP session, input model và model validation. |
 | RESTFUL API/service | Resource URL và HTTP GET/POST/PUT/DELETE của các controller API. |
 | Security, quốc tế hóa | Phần phân tích ở trên và các test xác thực/quyền/CSRF/validation. |
-| Báo cáo, thiết kế, test, cài đặt/build DB | Tài liệu trong `docs`, README và bộ script database. |
+| Báo cáo, thiết kế, test, cài đặt/build DB | Tài liệu trong `docs`, README và file `QuanLyKinhMat.sql` ngoài cùng. |
 
 Phải chạy các test case trước khi ghi nhận yêu cầu đã đạt trong báo cáo nộp; sự tồn tại của mã nguồn/tài liệu không thay thế kết quả chạy thực tế.

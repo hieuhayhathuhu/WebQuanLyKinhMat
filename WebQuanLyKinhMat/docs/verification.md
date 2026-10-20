@@ -47,7 +47,7 @@ Bằng chứng: [startup-check.json](startup-check.json). Không cộng các ki�
 | `scripts/verify-ui-extended.cjs` | 27 / 27 | Phân trang/lọc, bàn phím, CSV, chuỗi HTML/SQL và request lỗi |
 | **Tổng** | **186 / 186** | Không cộng các lượt chạy lặp |
 
-Đầu ra từng kiểm tra được tổng hợp trong [test-results.json](test-results.json), không kèm mật khẩu, cookie hoặc dữ liệu cá nhân từ database nguồn. [preview-check.json](screenshots/preview-check.json) ghi đủ 40 tổ hợp của 10 màn hình tại 320/390/768/1440px, đều không tràn chiều rộng trang.
+Đầu ra từng kiểm tra được tổng hợp trong [test-results.json](test-results.json), không kèm mật khẩu, cookie hoặc dữ liệu cá nhân từ database nguồn. [preview-check.json](preview-check.json) ghi đủ 40 tổ hợp của 10 màn hình tại 320/390/768/1440px, đều không tràn chiều rộng trang.
 
 Đã kiểm tra trực tiếp trên ứng dụng chạy với SQL Server, không dùng localStorage hoặc repository giả:
 
@@ -119,7 +119,7 @@ Số liệu đọc trực tiếp được lưu tại [database-final-check.json]
 | PasswordHash rỗng hoặc quá ngắn | 0 |
 | Tổng hóa đơn bán lệch chi tiết | 0 |
 
-Ảnh chạy thực tế nằm ở `docs/screenshots/`. Các giao dịch mẫu trong dump có ngày lịch sử, vì vậy doanh thu hôm nay có thể bằng 0; ứng dụng không tự sửa ngày chứng từ để tạo số liệu mới.
+Các giao dịch mẫu trong dump có ngày lịch sử, vì vậy doanh thu hôm nay có thể bằng 0; ứng dụng không tự sửa ngày chứng từ để tạo số liệu mới.
 
 ## Giới hạn của kết quả
 

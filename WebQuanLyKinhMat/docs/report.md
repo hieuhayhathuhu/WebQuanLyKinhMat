@@ -174,25 +174,17 @@ Desktop chia thành sidebar, thanh trạng thái, nội dung và hộp thoại. 
 | Người dùng | Cookie Authentication, Claims, HTTP session, `PasswordHasher<WebUser>` |
 | Kiểm thử | Node.js, Playwright, Edge, gọi API và đối chiếu SQL |
 
-Mã được tách thành `Controllers`, `Models`, `Data`, `Services`, `Views`, `wwwroot`; các công cụ/tài liệu ở `database`, `scripts`, `docs`, `artifacts`. `StoreRepository` xử lý dữ liệu/chứng từ; `AccountRepository` xử lý tài khoản; `SqlDatabase` mở kết nối và kiểm tra đích; `SessionIssuer` cấp claims/cookie/session. Dự án dùng SqlClient trực tiếp, không dùng Entity Framework trong lớp truy cập dữ liệu.
+Mã được tách thành `Controllers`, `Models`, `Data`, `Services`, `Views`, `wwwroot`; công cụ và tài liệu nằm trong `scripts`, `docs`. File khởi tạo SQL nằm ở thư mục ngoài cùng; kết quả kiểm thử sinh thêm nằm trong `artifacts` và được loại khỏi Git. `StoreRepository` xử lý dữ liệu/chứng từ; `AccountRepository` xử lý tài khoản; `SqlDatabase` mở kết nối và kiểm tra đích; `SessionIssuer` cấp claims/cookie/session. Dự án dùng SqlClient trực tiếp, không dùng Entity Framework trong lớp truy cập dữ liệu.
 
 ### 3.2. Kết quả giao diện
 
 Đăng nhập có tên người dùng, mật khẩu, ghi nhớ và thông báo validation. Sai người dùng và sai mật khẩu dùng thông báo chung, không tiết lộ riêng tài khoản có tồn tại.
 
-![Hình 3.1. Trang đăng nhập đã chạy thực tế](screenshots/login.png)
-
 Tổng quan hiển thị doanh thu/hóa đơn hôm nay, sản phẩm đang bán, hàng cần bổ sung, biểu đồ và chứng từ gần đây. Chỉ hóa đơn hoàn tất được tính doanh thu. Ngày dữ liệu mẫu là ngày lịch sử nên chỉ số hôm nay có thể bằng 0; ứng dụng không tự đổi ngày để tạo doanh thu.
-
-![Hình 3.2. Tổng quan cửa hàng trên desktop](screenshots/overview-desktop.png)
 
 Sản phẩm có CRUD theo quyền, ngừng bán, tìm tên/mã/thương hiệu, lọc loại/trạng thái tồn, phân trang 8 dòng và xuất CSV. Tìm “kinh doi anh” khớp tên “Kính Đổi Ánh”. Khách hàng/nhà cung cấp có tên, điện thoại, email, địa chỉ; khách có ghi chú. Form và API kiểm tra độc lập các giới hạn nhập.
 
-![Hình 3.3. Danh sách sản phẩm trên desktop](screenshots/products-desktop.png)
-
 Nhập/bán cho chọn đối tác, số lượng, giá/giảm giá và kiểm tra trước khi lưu. Lịch sử hiển thị chi tiết, trạng thái và thao tác hủy theo quyền. Báo cáo nhóm theo **mã sản phẩm**, tránh gộp hàng khác mã trùng tên. Admin quản lý tài khoản, vai trò, trạng thái; mỗi người đổi mật khẩu của mình. Mobile giữ dữ liệu bảng trong khung cuộn.
-
-![Hình 3.4. Danh sách sản phẩm trên mobile](screenshots/products-mobile.png)
 
 ### 3.3. REST API và AJAX
 
@@ -297,7 +289,7 @@ Kiểm thử trên Windows, .NET SDK 10.0.401, ASP.NET Core 10.0.12, Edge, SQL S
 | Tìm/lọc/phân trang, keyboard, mạng, CSV | 27 / 27 | [test-results.json](test-results.json): Tìm kiếm, bàn phím, CSV và lỗi mạng |
 | **Tổng** | **186 / 186** | Không cộng các lượt dở hoặc kiểm tra lặp trước đó. |
 
-Ngoài 186 kiểm tra, **40/40 tổ hợp bố cục** của 10 màn hình tại 320, 390, 768, 1440px đạt, không tràn toàn trang; dữ liệu ở [preview-check.json](screenshots/preview-check.json). Tệp còn ghi nhận không có page error, đăng xuất và validation tiếng Việt. Các kiểm tra bố cục không cộng thêm vào 186. Danh mục điều kiện/đầu vào/đầu ra nằm trong [test-cases.md](test-cases.md), mô tả kết quả trong [verification.md](verification.md).
+Ngoài 186 kiểm tra, **40/40 tổ hợp bố cục** của 10 màn hình tại 320, 390, 768, 1440px đạt, không tràn toàn trang; dữ liệu ở [preview-check.json](preview-check.json). Tệp còn ghi nhận không có page error, đăng xuất và validation tiếng Việt. Các kiểm tra bố cục không cộng thêm vào 186. Danh mục điều kiện/đầu vào/đầu ra nằm trong [test-cases.md](test-cases.md), mô tả kết quả trong [verification.md](verification.md).
 
 186 là số kiểm tra/assertion trong các bộ thực thi, không đồng nghĩa 186 ca nghiệp vụ độc lập hoặc đã bao phủ mọi trạng thái có thể xảy ra.
 
@@ -372,7 +364,6 @@ Kết quả đánh giá giới hạn ở dữ liệu mẫu và môi trường ki
 | Sitemap và wireframe | [wireframes.md](wireframes.md) |
 | Danh mục test và kết quả thực tế | [test-cases.md](test-cases.md), [verification.md](verification.md), [test-results.json](test-results.json) |
 | Schema, dữ liệu và quy tắc khởi tạo | [Hướng dẫn database](database.md), [SQL](../../QuanLyKinhMat.sql) |
-| Ảnh chạy thực tế | `docs/screenshots/` |
 | Mã nguồn | [WebQuanLyKinhMat.csproj](../WebQuanLyKinhMat.csproj), `Controllers`, `Models`, `Data`, `Services`, `Views`, `wwwroot` |
 | Khởi chạy và kiểm thử | Visual Studio / `dotnet run`; công cụ kiểm thử trong `scripts/` |
 

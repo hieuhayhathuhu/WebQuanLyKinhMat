@@ -4,7 +4,7 @@ const loginOnly = process.argv.includes('--login-only');
 const credentials = loginOnly ? null : require('./qa-credentials.cjs').getQaCredentials();
 const { chromium } = require('./qa-browser.cjs');
 const base = process.env.KINHMAT_TEST_URL || 'http://127.0.0.1:5088';
-const directory = path.resolve(__dirname, '../docs/screenshots');
+const directory = path.resolve(__dirname, '../artifacts/previews');
 fs.mkdirSync(directory, { recursive: true });
 (async () => {
   const browser = await chromium.launch({ headless: true, channel: 'msedge' });

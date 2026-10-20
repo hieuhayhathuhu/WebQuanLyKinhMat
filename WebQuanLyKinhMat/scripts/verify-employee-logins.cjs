@@ -36,7 +36,9 @@ function check(name, condition) { result.tests.push({ name, pass: !!condition })
           await page.evaluate(() => { location.hash = 'users'; });
           await page.waitForFunction(() => document.querySelector('#main').getAttribute('aria-busy') === 'false' && document.querySelectorAll('#main tbody tr').length === 3);
           check('Accounts screen shows three employee rows and no demo names', await page.locator('#main tbody tr').count() === 3 && !/\badmin\b|\bnhanvien\b/.test(await page.locator('#main tbody').innerText()));
-          await page.screenshot({ path: path.resolve(__dirname, '../docs/screenshots/users-after-demo-removal.png'), fullPage: true });
+          const previewDirectory = path.resolve(__dirname, '../artifacts/previews');
+          fs.mkdirSync(previewDirectory, { recursive: true });
+          await page.screenshot({ path: path.join(previewDirectory, 'users-after-demo-removal.png'), fullPage: true });
         }
         await context.request.post(base + '/account/logout', { headers: { 'X-CSRF-TOKEN': user.csrfToken } });
         check('Employee ' + id + ' logout removes authentication', (await context.request.get(base + '/api/products')).status() === 401);

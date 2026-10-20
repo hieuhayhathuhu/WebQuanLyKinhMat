@@ -1,6 +1,6 @@
 # Sitemap và wireframe giao diện
 
-Các khung dưới đây mô tả bố cục chức năng của giao diện; màu, biểu tượng và dữ liệu cụ thể được thể hiện trong ảnh chụp sản phẩm chạy thực tế. Những nút chỉ dành cho Admin được ẩn ở phiên Staff, đồng thời endpoint vẫn kiểm tra quyền.
+Các khung dưới đây mô tả bố cục và vị trí các chức năng chính của giao diện. Những nút chỉ dành cho Admin được ẩn ở phiên Staff, đồng thời endpoint vẫn kiểm tra quyền.
 
 ## Sitemap
 

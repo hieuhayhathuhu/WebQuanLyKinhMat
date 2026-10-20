@@ -4,8 +4,6 @@
 
 Ứng dụng dùng ASP.NET Core MVC (.NET 10), C#, Razor, JavaScript và SQL Server; truy cập dữ liệu bằng ADO.NET/`Microsoft.Data.SqlClient`. Hệ thống dành cho quản lý và nhân viên, hỗ trợ bán hàng, nhập hàng, quản lý tồn kho và báo cáo doanh thu.
 
-![Giao diện quản lý sản phẩm](WebQuanLyKinhMat/docs/screenshots/products-desktop.png)
-
 ## 1. Tài khoản đăng nhập
 
 | Tên đăng nhập | Mật khẩu khởi tạo | Quyền |
