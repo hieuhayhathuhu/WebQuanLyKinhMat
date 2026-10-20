@@ -27,7 +27,8 @@ $seed = New-Object System.Text.StringBuilder
 [void]$seed.AppendLine(@'
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 IF EXISTS(SELECT 1 FROM dbo.WebUsers) THROW 51003, 'WebUsers must be empty for initial account seed.', 1;
 '@)
 for ($index=0; $index -lt 3; $index++) {
@@ -41,6 +42,8 @@ for ($index=0; $index -lt 3; $index++) {
 $file=Join-Path (Split-Path -Parent $projectRoot) 'QuanLyKinhMat.sql'
 $sql=[System.IO.File]::ReadAllText($file,[System.Text.Encoding]::UTF8)
 $sql=[regex]::Replace($sql,'(?s)\r?\n?-- BEGIN WEB EMPLOYEE ACCOUNT SEED.*?-- END WEB EMPLOYEE ACCOUNT SEED\s*','')
-$sql=$sql.TrimEnd()+"`r`n`r`n"+$seed.ToString()
+$footer='-- COMPLETE DATABASE INITIALIZATION'
+if (-not $sql.Contains($footer)) { throw 'Missing database initialization footer.' }
+$sql=$sql.Replace($footer, $seed.ToString()+"`r`n"+$footer)
 [System.IO.File]::WriteAllText($file,$sql,(New-Object System.Text.UTF8Encoding($false)))
 Write-Host 'Da dong goi 3 tai khoan ma nhan vien duoi dang PasswordHash vao SQL khoi tao. Khong xuat mat khau van ban.'

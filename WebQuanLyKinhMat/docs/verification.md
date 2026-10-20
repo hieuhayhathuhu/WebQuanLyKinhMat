@@ -10,7 +10,18 @@ Chạy import lần đầu thêm 3, chạy lại thêm 0. Đối chiếu schema/
 
 ## SQL và bộ nộp độc lập
 
-SQL khởi tạo đã chứa schema/dữ liệu và 3 PasswordHash. Đã kiểm tra cú pháp 175 batch bằng PARSEONLY, không thực thi thay đổi lên database đang dùng. Không tạo lại database hiện tại để thử khởi tạo mới. Solution được đặt ngoài thư mục project MVC; Database nằm trong project theo cấu trúc mẫu.
+SQL khởi tạo chứa schema/dữ liệu và 3 PasswordHash. Lượt trước đã kiểm tra cú pháp 175 batch bằng PARSEONLY. Solution và file SQL được đặt ngoài thư mục project MVC.
+
+## Xác nhận quy trình khởi chạy ngày 20/10/2026
+
+Đã bỏ công cụ khởi chạy cũ. File SQL hiện chạy trực tiếp trong SSMS; ứng dụng khởi chạy bằng Visual Studio hoặc `dotnet run`.
+
+- Chạy 179 batch trên một kết nối SQL tới database tạm: tạo đủ 22 bảng, 8 sản phẩm có đường dẫn ảnh và 3 tài khoản web; transaction commit và dấu session được xóa.
+- Chạy lại toàn bộ SQL, kể cả tiếp tục sau lỗi như SSMS: bị từ chối với mã 51001; số dòng và checksum của cả 22 bảng giữ nguyên.
+- Chèn lỗi thực thi thử trước commit: schema và seed rollback, transaction đóng. Hai database tạm đã được dọn; database web đang dùng giữ nguyên.
+- Release build: 0 lỗi, 0 cảnh báo. Chạy đúng lệnh `dotnet run` với launch profile của project tại cổng 5080: health ready, đăng nhập quản lý thành công, API trả đủ 8 sản phẩm và cả 8 ảnh trả HTTP 200. Đã dừng phiên thử bằng Ctrl + C.
+
+Bằng chứng: [startup-check.json](startup-check.json). Không cộng các kiểm tra này vào tổng 186 của các lượt trước. Đường chạy Visual Studio được cấu hình trong `Properties/launchSettings.json`; lượt xác nhận mới dùng .NET CLI.
 
 ## Biên dịch và kết nối
 
@@ -20,8 +31,8 @@ SQL khởi tạo đã chứa schema/dữ liệu và 3 PasswordHash. Đã kiểm 
 - Có 22 bảng trong bản web, gồm 21 bảng nguồn và WebUsers.
 - Chạy lại khởi tạo trên DB đã có: bị từ chối đúng trước khi ghi; tài khoản TaiKhoan cũ còn hoạt động/mật khẩu cũ: 0.
 - Đăng xuất trả 200; gọi API sau đăng xuất trả 401 và mở trang ứng dụng chuyển tới đăng nhập.
-- Bản publish trong `runtime/` và launcher `CHAY-WEB.cmd` đã chạy thành công tại cổng 5080; kiểm tra đăng nhập, thông báo validation tiếng Việt và đăng xuất đều đạt.
-- Gói ZIP đã giải nén sang thư mục khác có khoảng trắng và chạy bằng launcher tại cổng 5081: health ready, trang đăng nhập trả 200 và có token CSRF. Không phụ thuộc thư mục build ban đầu. Các tiến trình kiểm thử đã được dừng sau khi hoàn tất.
+- Ở lượt kiểm thử trước, bản publish đã chạy thành công tại cổng 5080; kiểm tra đăng nhập, thông báo validation tiếng Việt và đăng xuất đều đạt. Bản nộp hiện dùng Visual Studio hoặc `dotnet run`.
+- Ở lượt kiểm thử trước, gói ZIP đã giải nén sang thư mục khác có khoảng trắng và chạy tại cổng 5081: health ready, trang đăng nhập trả 200 và có token CSRF. Không phụ thuộc thư mục build ban đầu. Các tiến trình kiểm thử đã được dừng sau khi hoàn tất.
 - Đã đọc fingerprint trước/sau một vòng nhập hai dòng, hủy và dọn QA: schema, số dòng và SHA256 của cả 22 bảng hiện có trong `QuanLyKinhMat` giống nhau. Dùng `scripts/Verify-OriginalDatabase.ps1`; snapshot được tạo ở vòng kiểm thử bổ sung, không phải trước lần khởi tạo đầu tiên. Xem [original-database-check.json](original-database-check.json).
 
 ## Các bộ kiểm thử tự động
@@ -68,7 +79,7 @@ Các fixture đều có mã QA và token được ghi nhận. Sau kiểm thử, 
 
 ## Chạy lại kiểm thử
 
-Các script QA cần Node.js, Microsoft Edge và Playwright 1.62.1. Chúng ưu tiên dependency trong `scripts/node_modules`; trên máy phát triển cũng nhận runtime sẵn có. Việc dùng ứng dụng bằng `CHAY-WEB.cmd` không cần Node hoặc Playwright.
+Các script QA cần Node.js, Microsoft Edge và Playwright 1.62.1. Chúng ưu tiên dependency trong `scripts/node_modules`; trên máy phát triển cũng nhận runtime sẵn có. Chạy ứng dụng bằng Visual Studio hoặc `dotnet run` không cần Node hoặc Playwright.
 
 ```powershell
 npm install --prefix scripts
@@ -78,7 +89,7 @@ $env:KINHMAT_TEST_PASSWORD = '<mật khẩu quản lý hiện tại>'
 node scripts/verify-app.cjs
 ```
 
-Mở web bằng launcher trước khi chạy. Mỗi script in đường dẫn JSON kết quả; dọn ngay lượt vừa chạy bằng `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Cleanup-TestData.ps1 -ResultsFile <đường dẫn JSON>`. Chạy các bộ nối tiếp để tránh fixture làm thay đổi số bản ghi của nhau. Trước bộ `verify-auth-extended.cjs`, để cách các lần đăng nhập trước ít nhất một phút vì máy chủ giới hạn 12 lần đăng nhập/phút. Các script dùng mã quản lý từ KINHMAT_TEST_USER (mặc định 1), bắt buộc truyền KINHMAT_TEST_PASSWORD; không lưu mật khẩu thật trong mã QA.
+Mở web bằng Visual Studio hoặc `dotnet run` trước khi chạy kiểm thử. Mỗi script in đường dẫn JSON kết quả; dọn ngay lượt vừa chạy bằng `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Cleanup-TestData.ps1 -ResultsFile <đường dẫn JSON>`. Chạy các bộ nối tiếp để tránh fixture làm thay đổi số bản ghi của nhau. Trước bộ `verify-auth-extended.cjs`, để cách các lần đăng nhập trước ít nhất một phút vì máy chủ giới hạn 12 lần đăng nhập/phút. Các script dùng mã quản lý từ KINHMAT_TEST_USER (mặc định 1), bắt buộc truyền KINHMAT_TEST_PASSWORD; không lưu mật khẩu thật trong mã QA.
 
 Đối chiếu database gốc: chạy `Verify-OriginalDatabase.ps1 -Mode Baseline` trước lượt kiểm thử và `-Mode Compare` sau lượt đó. Dùng `-SnapshotFile` mới cho mỗi baseline; script không ghi đè bằng chứng cũ và chỉ đọc SQL. Công cụ này dành cho máy hiện có `QuanLyKinhMat`; không cần cho thao tác sử dụng web thường ngày.
 

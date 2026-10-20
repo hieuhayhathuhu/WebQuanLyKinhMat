@@ -26,29 +26,17 @@ Trong chính các câu seed của bản SQL mới:
 
 SQL đã kèm đủ ba tài khoản: mã `1` là Admin; mã `2`, `3` là Staff. Người dùng nhập mã nhân viên và mật khẩu đã cung cấp cho bản chạy. Hash được tạo bằng ASP.NET PasswordHasher, không dùng cột Passw để xác thực web. Thông tin đăng nhập mẫu nằm trong [README](../../README.md#1-tài-khoản-đăng-nhập).
 
-Máy mới chỉ cần SQL Server, bộ SQL và runner đi kèm; không cần `QuanLyKinhMat` gốc. `scripts/Import-EmployeeLogins.ps1` là công cụ chuyển tùy chọn từ bản gốc khi cần, không phải bước dựng bộ nộp. Công cụ chỉ đọc nguồn, không reset tài khoản đã có; gặp hash PBKDF2 cũ sẽ dừng để chuyển bằng xác minh mật khẩu.
+Máy mới chỉ cần SQL Server, SSMS và bộ SQL đi kèm; không cần `QuanLyKinhMat` gốc. `scripts/Import-EmployeeLogins.ps1` là công cụ chuyển tùy chọn từ bản gốc khi cần, không phải bước dựng bộ nộp. Công cụ chỉ đọc nguồn, không reset tài khoản đã có; gặp hash PBKDF2 cũ sẽ dừng để chuyển bằng xác minh mật khẩu.
 
 ## Chạy khởi tạo
 
-Tại thư mục project:
+Trong SSMS, kết nối SQL Server, mở toàn bộ [QuanLyKinhMat.sql](../../QuanLyKinhMat.sql) và nhấn **F5**. Tài khoản kết nối cần quyền tạo database. Chỉ chạy lần đầu khi `QuanLyKinhMatWeb` chưa tồn tại.
 
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Initialize-Database.ps1 -Server 'HIEUCOI\SQLEXPRESS'
-```
+Script tự tạo database bằng đường dẫn mặc định của SQL Server, chuyển sang database mới rồi chạy schema và dữ liệu mẫu trong transaction. Từng batch kiểm tra tên database, dấu `SESSION_CONTEXT` của lần khởi tạo và trạng thái transaction. Cuối script commit và xóa dấu session.
 
-Runner dùng `System.Data.SqlClient` của Windows PowerShell và Windows Authentication. Tên database đích cố định là **QuanLyKinhMatWeb**, không có tham số chuyển sang database gốc.
+Nếu database đã có, script từ chối khởi tạo, không ghi đè dữ liệu. `XACT_ABORT ON` hoàn tác transaction khi gặp lỗi thực thi; database mới được giữ lại để kiểm tra lỗi. Không chạy riêng một đoạn seed/schema hoặc tự xóa database đang sử dụng.
 
-Trình tự thực hiện:
-
-1. Kết nối `master`, kiểm tra database đích chưa tồn tại.
-2. Tạo database mới bằng đường dẫn mặc định do SQL Server quản lý.
-3. Kết nối riêng tới database vừa tạo, kiểm tra chưa có bảng người dùng.
-4. Đánh dấu connection bằng `SESSION_CONTEXT` rồi chạy các batch schema/seed trong một transaction.
-5. Commit nếu toàn bộ batch thành công; rollback schema/seed nếu một batch lỗi.
-
-Từng batch SQL kiểm tra cả `DB_NAME()` và dấu session của runner. Chạy file SQL trực tiếp trên database gốc hoặc bằng connection thông thường sẽ bị từ chối. Hãy dùng runner thay vì bỏ các guard để chạy thủ công.
-
-Nếu database đã tồn tại, runner dừng **trước mọi thao tác tạo bảng/seed**. Script không có `DROP`, `TRUNCATE`, chế độ ghi đè hay chế độ dọn database. Khi schema lỗi, database mới vẫn tồn tại để chẩn đoán; không tự chạy lại trên database đó. Sau khi kiểm tra nguyên nhân, quản trị viên quyết định cách xử lý bản khởi tạo lỗi.
+Sau khi chuẩn bị database, sửa `ConnectionStrings.Store` trong `appsettings.json` cho đúng SQL Server, mở solution bằng Visual Studio hoặc dùng `dotnet run`.
 
 ## Kiểm tra sau khởi tạo
 
@@ -68,8 +56,8 @@ SELECT COUNT(*) AS WebAccountCount FROM dbo.WebUsers;
 
 Kỳ vọng: database đúng tên, 22 bảng, hai số đếm mật khẩu/tài khoản cũ bằng 0, hai filtered index có điều kiện `TokenLuu IS NOT NULL`, ghi chú có kích thước 1000 byte (500 ký tự Unicode). `WebUsers` có ba tài khoản mã nhân viên ngay sau khởi tạo; khởi động lại không tự tạo thêm tài khoản.
 
-Không xuất `PasswordHash` hoặc dữ liệu cá nhân để chứng minh kết quả. Database WinForms gốc không nằm trong chuỗi kết nối của runner ở bất kỳ bước import nào.
+Không xuất `PasswordHash` hoặc dữ liệu cá nhân để chứng minh kết quả. Script khởi tạo chỉ ghi vào database web mới; không thay đổi database WinForms gốc.
 
 ## Vị trí SQL trong repository
 
-File SQL hoàn chỉnh nằm ở ngoài cùng: [QuanLyKinhMat.sql](../../QuanLyKinhMat.sql). Runner trong `scripts/Initialize-Database.ps1` đọc file này theo đường dẫn tương đối; không phụ thuộc tên thư mục clone hoặc database gốc trên máy chấm bài.
+File SQL hoàn chỉnh nằm ở ngoài cùng: [QuanLyKinhMat.sql](../../QuanLyKinhMat.sql). Mở trực tiếp file này trong SSMS; không phụ thuộc tên thư mục clone hoặc database gốc trên máy chấm bài.

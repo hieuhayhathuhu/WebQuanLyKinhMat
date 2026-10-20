@@ -18,13 +18,17 @@ Tên đăng nhập ban đầu trùng mã nhân viên. Tài khoản `2` và `3` c
 
 ## 2. Khởi chạy dự án
 
-1. Chuẩn bị **.NET 10 SDK** và **SQL Server**.
-2. Sửa tên `Server` trong `WebQuanLyKinhMat/appsettings.json` cho đúng máy; giữ database **`QuanLyKinhMatWeb`**.
-3. Mở thư mục project bên trong, chạy **`CHAY-WEB.cmd`**, đợi biên dịch rồi truy cập [http://127.0.0.1:5080](http://127.0.0.1:5080).
+1. Chuẩn bị **.NET 10 SDK**, **SQL Server** và **SSMS**.
+2. Trong SSMS, mở **`QuanLyKinhMat.sql`** ở thư mục ngoài cùng và nhấn **F5** để tạo database/dữ liệu mẫu. Bỏ qua bước này nếu đã có database **`QuanLyKinhMatWeb`**.
+3. Sửa `Server` trong `WebQuanLyKinhMat/appsettings.json` theo máy chủ SQL của bạn; giữ tên database và Windows Authentication.
+4. Mở **`WebQuanLyKinhMat.slnx`** bằng Visual Studio, nhấn **F5** hoặc **Ctrl + F5**. Hoặc mở terminal tại thư mục ngoài cùng, chạy:
 
-Launcher tự khởi tạo database từ `QuanLyKinhMat.sql` nếu chưa có; tài khoản Windows cần quyền tạo database. Database đã có được giữ nguyên. Dùng **`TAT-WEB.cmd`** để dừng.
+```powershell
+cd WebQuanLyKinhMat
+dotnet run
+```
 
-Muốn mở bằng Visual Studio, dùng **`WebQuanLyKinhMat.slnx` ở ngoài cùng**. Xem [hướng dẫn cài đặt ngắn](CAI_DAT_VA_SU_DUNG.md) để chuẩn bị database trước khi nhấn F5.
+Truy cập [http://127.0.0.1:5080](http://127.0.0.1:5080). Xem [hướng dẫn cài đặt](CAI_DAT_VA_SU_DUNG.md) để biết cấu hình kết nối và tài khoản.
 
 ## 3. Chức năng đã thực hiện
 
@@ -82,7 +86,7 @@ WebQuanLyKinhMat/
 └── README.md
 ```
 
-File SQL được runner nạp vào database **`QuanLyKinhMatWeb`**. Bộ dữ liệu có 22 bảng; máy cài mới không cần database WinForms gốc. Giỏ chưa lưu chỉ giữ trong trang đang mở, tải lại trang sẽ mất giỏ. Ứng dụng đã kiểm tra trong môi trường local; phạm vi kiểm thử được ghi trong tài liệu kết quả.
+File SQL chạy trực tiếp trong SSMS để khởi tạo database **`QuanLyKinhMatWeb`**. Bộ dữ liệu có 22 bảng; máy cài mới không cần database WinForms gốc. Giỏ chưa lưu chỉ giữ trong trang đang mở, tải lại trang sẽ mất giỏ. Ứng dụng đã kiểm tra trong môi trường local; phạm vi kiểm thử được ghi trong tài liệu kết quả.
 
 - [Cài đặt và sử dụng](CAI_DAT_VA_SU_DUNG.md).
 - [Báo cáo kỹ thuật](WebQuanLyKinhMat/docs/report.md).

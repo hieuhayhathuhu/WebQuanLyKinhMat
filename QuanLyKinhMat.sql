@@ -1,27 +1,43 @@
--- Sanitized clone of the supplied QLKM.sql; UTF-8 without BOM.
--- Run through scripts/Initialize-Database.ps1. Every batch rejects another database
--- or a connection that was not marked by the guarded provisioning script.
--- Preserves 21 original tables, views, keys, constraints, data and filtered token indexes.
--- Removes server logins/users, physical file paths and server-specific database options.
--- NhanVien.Passw is NULL; legacy TaiKhoan rows are disabled with empty passwords.
--- Application login uses WebUsers with PasswordHasher; no web password is seeded here.
+-- WebQuanLyKinhMat: run this entire file in SQL Server Management Studio (F5).
+-- Requires permission to create a database. Existing databases are never overwritten.
+-- Creates 22 tables and sample data, including three hashed web accounts.
+-- Does not change the original QuanLyKinhMat database.
+USE [master];
+GO
+EXEC sys.sp_set_session_context @key=N'KinhMat.Provisioning', @value=NULL;
+IF DB_ID(N'QuanLyKinhMatWeb') IS NOT NULL
+    THROW 51001, 'QuanLyKinhMatWeb already exists. Use it; initialization does not overwrite data.', 1;
+CREATE DATABASE [QuanLyKinhMatWeb];
+EXEC sys.sp_set_session_context @key=N'KinhMat.Provisioning', @value=N'NewDatabaseOnly';
+GO
+USE [QuanLyKinhMatWeb];
+GO
+IF DB_NAME() <> N'QuanLyKinhMatWeb'
+    OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
+SET XACT_ABORT ON;
+BEGIN TRANSACTION;
+GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[SanPham]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[SanPham](
 	[MaSanPham] [int] IDENTITY(1,1) NOT NULL,
 	[TenSanPham] [nvarchar](150) NOT NULL,
@@ -63,20 +79,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  View [dbo].[v_SanPhamDen]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 EXEC(N'CREATE VIEW [dbo].[v_SanPhamDen]
 AS
 SELECT MaSanPham, TenSanPham, GiaBan
@@ -86,20 +105,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[KhachHang]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[KhachHang](
 	[MaKhachHang] [int] IDENTITY(1,1) NOT NULL,
 	[HoTen] [nvarchar](100) NOT NULL,
@@ -117,20 +139,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  View [dbo].[v_KhachNu]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 EXEC(N'create view [dbo].[v_KhachNu]
 as 
 select MaKhachHang, HoTen, SoDienThoai
@@ -140,20 +165,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  View [dbo].[v_loinhuan]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 EXEC(N'create view [dbo].[v_loinhuan]
 as
 select MaSanPham, TenSanPham, (GiaBan - GiaNhap) as LoiNhuan
@@ -162,20 +190,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  View [dbo].[v_TuoiKhach]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 EXEC(N'create view [dbo].[v_TuoiKhach]
 as
 select MaKhachHang, HoTen, DATEDIFF(year,NgaySinh,GETDATE()) as Tuoi
@@ -184,20 +215,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[BaoHanh]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[BaoHanh](
 	[MaBaoHanh] [int] IDENTITY(1,1) NOT NULL,
 	[TenBaoHanh] [nvarchar](500) NOT NULL,
@@ -210,20 +244,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[ChatLieu]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[ChatLieu](
 	[MaChatLieu] [int] IDENTITY(1,1) NOT NULL,
 	[TenChatLieu] [nvarchar](500) NOT NULL,
@@ -236,20 +273,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[ChiTietHoaDonBan]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[ChiTietHoaDonBan](
 	[MaHoaDon] [int] NOT NULL,
 	[MaSanPham] [int] NOT NULL,
@@ -268,20 +308,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[ChiTietPhieuNhap]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[ChiTietPhieuNhap](
 	[MaPhieuNhap] [int] NOT NULL,
 	[MaSanPham] [int] NOT NULL,
@@ -302,20 +345,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[ChucVu]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[ChucVu](
 	[MaChucVu] [int] IDENTITY(1,1) NOT NULL,
 	[TenChucVu] [nvarchar](100) NOT NULL,
@@ -328,20 +374,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[CongDung]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[CongDung](
 	[MaCongDung] [int] IDENTITY(1,1) NOT NULL,
 	[TenCongDung] [nvarchar](500) NOT NULL,
@@ -354,20 +403,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[DacDiem]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[DacDiem](
 	[MaDacDiem] [int] IDENTITY(1,1) NOT NULL,
 	[TenDacDiem] [nvarchar](500) NOT NULL,
@@ -380,20 +432,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[Diop]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[Diop](
 	[MaDiop] [int] IDENTITY(1,1) NOT NULL,
 	[TenDiop] [nvarchar](500) NOT NULL,
@@ -406,20 +461,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[HinhDang]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[HinhDang](
 	[MaHinhDang] [int] IDENTITY(1,1) NOT NULL,
 	[TenHinhDang] [nvarchar](500) NOT NULL,
@@ -432,20 +490,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[HoaDonBan]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[HoaDonBan](
 	[MaHoaDon] [int] IDENTITY(1,1) NOT NULL,
 	[MaKhachHang] [int] NULL,
@@ -465,20 +526,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[LoaiGong]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[LoaiGong](
 	[MaLoaiGong] [int] IDENTITY(1,1) NOT NULL,
 	[TenLoaiGong] [nvarchar](500) NOT NULL,
@@ -491,20 +555,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[LoaiSanPham]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[LoaiSanPham](
 	[MaLoai] [int] IDENTITY(1,1) NOT NULL,
 	[TenLoai] [nvarchar](100) NOT NULL,
@@ -517,20 +584,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[MauSac]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[MauSac](
 	[MaMauSac] [int] IDENTITY(1,1) NOT NULL,
 	[TenMauSac] [nvarchar](500) NOT NULL,
@@ -543,20 +613,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[NhaCungCap]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[NhaCungCap](
 	[MaNhaCungCap] [int] IDENTITY(1,1) NOT NULL,
 	[TenNhaCungCap] [nvarchar](150) NOT NULL,
@@ -572,20 +645,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[NhanVien]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[NhanVien](
 	[MaNhanVien] [int] IDENTITY(1,1) NOT NULL,
 	[HoTen] [nvarchar](100) NOT NULL,
@@ -606,20 +682,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[NuocSanXuat]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[NuocSanXuat](
 	[MaNuocSanXuat] [int] IDENTITY(1,1) NOT NULL,
 	[TenNuocSanXuat] [nvarchar](500) NOT NULL,
@@ -632,20 +711,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[PhieuNhap]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[PhieuNhap](
 	[MaPhieuNhap] [int] IDENTITY(1,1) NOT NULL,
 	[MaNhaCungCap] [int] NOT NULL,
@@ -665,20 +747,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[TaiKhoan]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[TaiKhoan](
 	[MaTaiKhoan] [int] IDENTITY(1,1) NOT NULL,
 	[TenDangNhap] [varchar](50) NOT NULL,
@@ -695,20 +780,23 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Table [dbo].[ThuongHieu]    Script Date: 16/10/2026 23:27:14 ******/
 SET ANSI_NULLS ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET QUOTED_IDENTIFIER ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[ThuongHieu](
 	[MaThuongHieu] [int] IDENTITY(1,1) NOT NULL,
 	[TenThuongHieu] [nvarchar](100) NOT NULL,
@@ -722,7 +810,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[ChatLieu] ON 
 
 INSERT [dbo].[ChatLieu] ([MaChatLieu], [TenChatLieu]) VALUES (1, N'Kim loại')
@@ -733,7 +822,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 INSERT [dbo].[ChiTietHoaDonBan] ([MaHoaDon], [MaSanPham], [SoLuong], [DonGiaBan], [GiamGia], [ThanhTienChot]) VALUES (1, 1, 2, CAST(550000.00 AS Decimal(18, 2)), CAST(0.00 AS Decimal(5, 2)), NULL)
 INSERT [dbo].[ChiTietHoaDonBan] ([MaHoaDon], [MaSanPham], [SoLuong], [DonGiaBan], [GiamGia], [ThanhTienChot]) VALUES (1, 6, 2, CAST(440000.00 AS Decimal(18, 2)), CAST(0.00 AS Decimal(5, 2)), NULL)
 INSERT [dbo].[ChiTietHoaDonBan] ([MaHoaDon], [MaSanPham], [SoLuong], [DonGiaBan], [GiamGia], [ThanhTienChot]) VALUES (2, 2, 1, CAST(1650000.00 AS Decimal(18, 2)), CAST(0.00 AS Decimal(5, 2)), NULL)
@@ -747,7 +837,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 INSERT [dbo].[ChiTietPhieuNhap] ([MaPhieuNhap], [MaSanPham], [SoLuong], [DonGiaNhap], [GiamGia], [ThanhTienChot], [GiaNhapTruoc], [GiaBanTruoc]) VALUES (1, 1, 10, CAST(500000.00 AS Decimal(18, 2)), CAST(0.00 AS Decimal(5, 2)), NULL, NULL, NULL)
 INSERT [dbo].[ChiTietPhieuNhap] ([MaPhieuNhap], [MaSanPham], [SoLuong], [DonGiaNhap], [GiamGia], [ThanhTienChot], [GiaNhapTruoc], [GiaBanTruoc]) VALUES (1, 2, 3, CAST(1500000.00 AS Decimal(18, 2)), CAST(0.00 AS Decimal(5, 2)), NULL, NULL, NULL)
 INSERT [dbo].[ChiTietPhieuNhap] ([MaPhieuNhap], [MaSanPham], [SoLuong], [DonGiaNhap], [GiamGia], [ThanhTienChot], [GiaNhapTruoc], [GiaBanTruoc]) VALUES (2, 3, 3, CAST(2000000.00 AS Decimal(18, 2)), CAST(0.00 AS Decimal(5, 2)), NULL, NULL, NULL)
@@ -758,7 +849,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[ChucVu] ON 
 
 INSERT [dbo].[ChucVu] ([MaChucVu], [TenChucVu]) VALUES (1, N'Nhân viên bán hàng')
@@ -769,7 +861,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[HoaDonBan] ON 
 
 INSERT [dbo].[HoaDonBan] ([MaHoaDon], [MaKhachHang], [MaNhanVien], [NgayBan], [TongTien], [GhiChu], [SoHoaDon], [TokenLuu], [DaHuy]) VALUES (1, 1, 2, CAST(N'2026-04-01T00:00:00.000' AS DateTime), CAST(1980000.00 AS Decimal(18, 2)), NULL, NULL, NULL, 0)
@@ -782,7 +875,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[KhachHang] ON 
 
 INSERT [dbo].[KhachHang] ([MaKhachHang], [HoTen], [SoDienThoai], [DiaChi], [Email], [NgaySinh], [GioiTinh]) VALUES (1, N'Phạm Minh Đức', N'0971111111', N'Hà Nội', N'duc@gmail.com', CAST(N'2002-06-10' AS Date), N'Nam')
@@ -795,7 +889,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[LoaiSanPham] ON 
 
 INSERT [dbo].[LoaiSanPham] ([MaLoai], [TenLoai]) VALUES (1, N'Gọng kính')
@@ -808,7 +903,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[MauSac] ON 
 
 INSERT [dbo].[MauSac] ([MaMauSac], [TenMauSac]) VALUES (1, N'Bạc')
@@ -821,7 +917,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[NhaCungCap] ON 
 
 INSERT [dbo].[NhaCungCap] ([MaNhaCungCap], [TenNhaCungCap], [SoDienThoai], [DiaChi], [Email]) VALUES (1, N'Công ty Kính Việt', N'0241111111', N'Hà Nội', N'kinhviet@gmail.com')
@@ -832,7 +929,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[NhanVien] ON 
 
 INSERT [dbo].[NhanVien] ([MaNhanVien], [HoTen], [NgaySinh], [GioiTinh], [SoDienThoai], [DiaChi], [ChucVu], [TrangThai], [Passw], [MaChucVu]) VALUES (1, N'Nguyễn Văn An', CAST(N'2000-05-12' AS Date), N'Nam', N'0912345678', N'Hà Nội', N'Quản lý', 1, NULL, 3)
@@ -843,7 +941,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[PhieuNhap] ON 
 
 INSERT [dbo].[PhieuNhap] ([MaPhieuNhap], [MaNhaCungCap], [MaNhanVien], [NgayNhap], [TongTien], [GhiChu], [SoHoaDon], [TokenLuu], [DaHuy]) VALUES (1, 1, 3, CAST(N'2026-01-05T00:00:00.000' AS DateTime), CAST(9500000.00 AS Decimal(18, 2)), NULL, NULL, NULL, 0)
@@ -854,7 +953,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[SanPham] ON 
 
 INSERT [dbo].[SanPham] ([MaSanPham], [TenSanPham], [MaLoai], [MaThuongHieu], [MauSac], [ChatLieu], [GiaNhap], [GiaBan], [SoLuongTon], [MoTa], [TrangThai], [HinhAnh], [LoaiGong], [HinhDang], [Diop], [CongDung], [DacDiem], [NuocSanXuat], [BaoHanh], [GhiChu], [MaChatLieu], [MaMauSac], [MaLoaiGong], [MaHinhDang], [MaDiop], [MaCongDung], [MaDacDiem], [MaNuocSanXuat], [MaBaoHanh], [GiaNhapGoc], [GiaBanGoc]) VALUES (1, N'Gọng kính RB Classic', 1, 1, N'Đen', N'Kim loại', CAST(500000.00 AS Decimal(18, 2)), CAST(550000.00 AS Decimal(18, 2)), 20, N'Gọng kính kiểu dáng cổ điển', 1, N'/images/products/sp001-rb-classic.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, CAST(500000.00 AS Decimal(18, 2)), CAST(550000.00 AS Decimal(18, 2)))
@@ -870,7 +970,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[TaiKhoan] ON 
 
 INSERT [dbo].[TaiKhoan] ([MaTaiKhoan], [TenDangNhap], [MatKhau], [MaNhanVien], [Quyen], [TrangThai]) VALUES (1, N'admin', '', 1, N'Admin', 0)
@@ -881,7 +982,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET IDENTITY_INSERT [dbo].[ThuongHieu] ON 
 
 INSERT [dbo].[ThuongHieu] ([MaThuongHieu], [TenThuongHieu], [QuocGia]) VALUES (1, N'Ray-Ban', N'Ý')
@@ -894,13 +996,15 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET ANSI_PADDING ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Index [UQ__ChucVu__A7E2123E8BCAD63F]    Script Date: 16/10/2026 23:27:14 ******/
 ALTER TABLE [dbo].[ChucVu] ADD UNIQUE NONCLUSTERED 
 (
@@ -910,13 +1014,15 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET ANSI_PADDING ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Index [UX_HoaDonBan_So]    Script Date: 16/10/2026 23:27:14 ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UX_HoaDonBan_So] ON [dbo].[HoaDonBan]
 (
@@ -928,7 +1034,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Index [UX_HoaDonBan_Token]    Script Date: 16/10/2026 23:27:14 ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UX_HoaDonBan_Token] ON [dbo].[HoaDonBan]
 (
@@ -940,13 +1047,15 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET ANSI_PADDING ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Index [UX_PhieuNhap_So]    Script Date: 16/10/2026 23:27:14 ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UX_PhieuNhap_So] ON [dbo].[PhieuNhap]
 (
@@ -958,7 +1067,8 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Index [UX_PhieuNhap_Token]    Script Date: 16/10/2026 23:27:14 ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UX_PhieuNhap_Token] ON [dbo].[PhieuNhap]
 (
@@ -970,13 +1080,15 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 SET ANSI_PADDING ON
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 /****** Object:  Index [UQ__TaiKhoan__55F68FC00C147F2A]    Script Date: 16/10/2026 23:27:14 ******/
 ALTER TABLE [dbo].[TaiKhoan] ADD UNIQUE NONCLUSTERED 
 (
@@ -986,466 +1098,540 @@ GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietHoaDonBan] ADD  DEFAULT ((0)) FOR [GiamGia]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietPhieuNhap] ADD  DEFAULT ((0)) FOR [GiamGia]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[HoaDonBan] ADD  DEFAULT (getdate()) FOR [NgayBan]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[HoaDonBan] ADD  DEFAULT ((0)) FOR [TongTien]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[HoaDonBan] ADD  DEFAULT ((0)) FOR [DaHuy]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[NhanVien] ADD  DEFAULT ((1)) FOR [TrangThai]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[PhieuNhap] ADD  DEFAULT (getdate()) FOR [NgayNhap]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[PhieuNhap] ADD  DEFAULT ((0)) FOR [TongTien]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[PhieuNhap] ADD  DEFAULT ((0)) FOR [DaHuy]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] ADD  DEFAULT ((0)) FOR [GiaNhap]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] ADD  DEFAULT ((0)) FOR [GiaBan]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] ADD  DEFAULT ((0)) FOR [SoLuongTon]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] ADD  DEFAULT ((1)) FOR [TrangThai]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[TaiKhoan] ADD  DEFAULT ((1)) FOR [TrangThai]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietHoaDonBan]  WITH CHECK ADD  CONSTRAINT [FK_CTHD_HoaDon] FOREIGN KEY([MaHoaDon])
 REFERENCES [dbo].[HoaDonBan] ([MaHoaDon])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietHoaDonBan] CHECK CONSTRAINT [FK_CTHD_HoaDon]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietHoaDonBan]  WITH CHECK ADD  CONSTRAINT [FK_CTHD_SanPham] FOREIGN KEY([MaSanPham])
 REFERENCES [dbo].[SanPham] ([MaSanPham])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietHoaDonBan] CHECK CONSTRAINT [FK_CTHD_SanPham]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietPhieuNhap]  WITH CHECK ADD  CONSTRAINT [FK_CTPN_PhieuNhap] FOREIGN KEY([MaPhieuNhap])
 REFERENCES [dbo].[PhieuNhap] ([MaPhieuNhap])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietPhieuNhap] CHECK CONSTRAINT [FK_CTPN_PhieuNhap]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietPhieuNhap]  WITH CHECK ADD  CONSTRAINT [FK_CTPN_SanPham] FOREIGN KEY([MaSanPham])
 REFERENCES [dbo].[SanPham] ([MaSanPham])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietPhieuNhap] CHECK CONSTRAINT [FK_CTPN_SanPham]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[HoaDonBan]  WITH CHECK ADD  CONSTRAINT [FK_HoaDon_KhachHang] FOREIGN KEY([MaKhachHang])
 REFERENCES [dbo].[KhachHang] ([MaKhachHang])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[HoaDonBan] CHECK CONSTRAINT [FK_HoaDon_KhachHang]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[HoaDonBan]  WITH CHECK ADD  CONSTRAINT [FK_HoaDon_NhanVien] FOREIGN KEY([MaNhanVien])
 REFERENCES [dbo].[NhanVien] ([MaNhanVien])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[HoaDonBan] CHECK CONSTRAINT [FK_HoaDon_NhanVien]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[NhanVien]  WITH CHECK ADD  CONSTRAINT [FK_NhanVien_ChucVu] FOREIGN KEY([MaChucVu])
 REFERENCES [dbo].[ChucVu] ([MaChucVu])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[NhanVien] CHECK CONSTRAINT [FK_NhanVien_ChucVu]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[PhieuNhap]  WITH CHECK ADD  CONSTRAINT [FK_PhieuNhap_NCC] FOREIGN KEY([MaNhaCungCap])
 REFERENCES [dbo].[NhaCungCap] ([MaNhaCungCap])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[PhieuNhap] CHECK CONSTRAINT [FK_PhieuNhap_NCC]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[PhieuNhap]  WITH CHECK ADD  CONSTRAINT [FK_PhieuNhap_NhanVien] FOREIGN KEY([MaNhanVien])
 REFERENCES [dbo].[NhanVien] ([MaNhanVien])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[PhieuNhap] CHECK CONSTRAINT [FK_PhieuNhap_NhanVien]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [FK_SanPham_BaoHanh] FOREIGN KEY([MaBaoHanh])
 REFERENCES [dbo].[BaoHanh] ([MaBaoHanh])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [FK_SanPham_BaoHanh]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [FK_SanPham_ChatLieu] FOREIGN KEY([MaChatLieu])
 REFERENCES [dbo].[ChatLieu] ([MaChatLieu])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [FK_SanPham_ChatLieu]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [FK_SanPham_CongDung] FOREIGN KEY([MaCongDung])
 REFERENCES [dbo].[CongDung] ([MaCongDung])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [FK_SanPham_CongDung]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [FK_SanPham_DacDiem] FOREIGN KEY([MaDacDiem])
 REFERENCES [dbo].[DacDiem] ([MaDacDiem])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [FK_SanPham_DacDiem]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [FK_SanPham_Diop] FOREIGN KEY([MaDiop])
 REFERENCES [dbo].[Diop] ([MaDiop])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [FK_SanPham_Diop]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [FK_SanPham_HinhDang] FOREIGN KEY([MaHinhDang])
 REFERENCES [dbo].[HinhDang] ([MaHinhDang])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [FK_SanPham_HinhDang]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [FK_SanPham_Loai] FOREIGN KEY([MaLoai])
 REFERENCES [dbo].[LoaiSanPham] ([MaLoai])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [FK_SanPham_Loai]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [FK_SanPham_LoaiGong] FOREIGN KEY([MaLoaiGong])
 REFERENCES [dbo].[LoaiGong] ([MaLoaiGong])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [FK_SanPham_LoaiGong]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [FK_SanPham_MauSac] FOREIGN KEY([MaMauSac])
 REFERENCES [dbo].[MauSac] ([MaMauSac])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [FK_SanPham_MauSac]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [FK_SanPham_NuocSanXuat] FOREIGN KEY([MaNuocSanXuat])
 REFERENCES [dbo].[NuocSanXuat] ([MaNuocSanXuat])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [FK_SanPham_NuocSanXuat]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [FK_SanPham_ThuongHieu] FOREIGN KEY([MaThuongHieu])
 REFERENCES [dbo].[ThuongHieu] ([MaThuongHieu])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [FK_SanPham_ThuongHieu]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[TaiKhoan]  WITH CHECK ADD  CONSTRAINT [FK_TaiKhoan_NhanVien] FOREIGN KEY([MaNhanVien])
 REFERENCES [dbo].[NhanVien] ([MaNhanVien])
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[TaiKhoan] CHECK CONSTRAINT [FK_TaiKhoan_NhanVien]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietHoaDonBan]  WITH CHECK ADD CHECK  (([GiamGia]>=(0) AND [GiamGia]<=(100)))
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietHoaDonBan]  WITH CHECK ADD  CONSTRAINT [CK_CTHD_DonGia] CHECK  (([DonGiaBan]>=(0)))
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietHoaDonBan] CHECK CONSTRAINT [CK_CTHD_DonGia]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietHoaDonBan]  WITH CHECK ADD  CONSTRAINT [CK_CTHD_SoLuong] CHECK  (([SoLuong]>(0)))
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietHoaDonBan] CHECK CONSTRAINT [CK_CTHD_SoLuong]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietPhieuNhap]  WITH CHECK ADD CHECK  (([GiamGia]>=(0) AND [GiamGia]<=(100)))
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietPhieuNhap]  WITH CHECK ADD  CONSTRAINT [CK_CTPN_DonGia] CHECK  (([DonGiaNhap]>=(0)))
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietPhieuNhap] CHECK CONSTRAINT [CK_CTPN_DonGia]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietPhieuNhap]  WITH CHECK ADD  CONSTRAINT [CK_CTPN_SoLuong] CHECK  (([SoLuong]>(0)))
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[ChiTietPhieuNhap] CHECK CONSTRAINT [CK_CTPN_SoLuong]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [CK_SanPham_GiaBan] CHECK  (([GiaBan]>=(0)))
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [CK_SanPham_GiaBan]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [CK_SanPham_GiaNhap] CHECK  (([GiaNhap]>=(0)))
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [CK_SanPham_GiaNhap]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham]  WITH CHECK ADD  CONSTRAINT [CK_SanPham_SoLuongTon] CHECK  (([SoLuongTon]>=(0)))
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[SanPham] CHECK CONSTRAINT [CK_SanPham_SoLuongTon]
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 ALTER TABLE [dbo].[KhachHang] ADD [GhiChu] nvarchar(500) NULL;
 GO
 
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 CREATE TABLE [dbo].[WebUsers] (
     [Id] int IDENTITY(1,1) NOT NULL CONSTRAINT [PK_WebUsers] PRIMARY KEY,
     [EmployeeId] int NOT NULL CONSTRAINT [UQ_WebUsers_EmployeeId] UNIQUE,
@@ -1464,10 +1650,21 @@ GO
 -- BEGIN WEB EMPLOYEE ACCOUNT SEED
 IF DB_NAME() <> N'QuanLyKinhMatWeb'
     OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
-    THROW 51002, 'Run scripts/Initialize-Database.ps1 against a new QuanLyKinhMatWeb database.', 1;
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Run QuanLyKinhMat.sql from the beginning to initialize a new database.', 1;
 IF EXISTS(SELECT 1 FROM dbo.WebUsers) THROW 51003, 'WebUsers must be empty for initial account seed.', 1;
 INSERT dbo.WebUsers(EmployeeId,UserName,PasswordHash,DisplayName,Role,IsActive) VALUES(1,N'1',N'AQAAAAIAAYagAAAAEIg0tCr50rK0LFykE1guIyLvUI7BcdSDLk5YYScDdrhKm4T74oDxbaigqfQG8rA58w==',N'Nguyễn Văn An',N'Admin',1);
 INSERT dbo.WebUsers(EmployeeId,UserName,PasswordHash,DisplayName,Role,IsActive) VALUES(2,N'2',N'AQAAAAIAAYagAAAAEBDy1YgZuBx+6FeBZLiwyZ8Yom9NwyIak+t/wXH1iav5w1oo8vKpMxmeLxl+nfB15Q==',N'Trần Thị Lan',N'Staff',1);
 INSERT dbo.WebUsers(EmployeeId,UserName,PasswordHash,DisplayName,Role,IsActive) VALUES(3,N'3',N'AQAAAAIAAYagAAAAEEQdzA5Ij7vjL0r0oEdkWIjZeo/ZTdwGuzwWERbubUH47wBW+t4VVVQtWRFHsnwuhw==',N'Lê Minh Tuấn',N'Staff',1);
 GO
 -- END WEB EMPLOYEE ACCOUNT SEED
+
+-- COMPLETE DATABASE INITIALIZATION
+IF DB_NAME() <> N'QuanLyKinhMatWeb'
+    OR ISNULL(CONVERT(nvarchar(64), SESSION_CONTEXT(N'KinhMat.Provisioning')), N'') <> N'NewDatabaseOnly'
+    OR XACT_STATE() <> 1
+    THROW 51002, 'Database initialization did not complete. Check preceding errors.', 1;
+COMMIT TRANSACTION;
+EXEC sys.sp_set_session_context @key=N'KinhMat.Provisioning', @value=NULL;
+PRINT N'QuanLyKinhMatWeb initialized successfully. Open WebQuanLyKinhMat.slnx or run dotnet run.';
+GO

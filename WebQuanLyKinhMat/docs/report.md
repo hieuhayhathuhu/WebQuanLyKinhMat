@@ -275,9 +275,9 @@ Hiện chỉ có giao diện tiếng Việt; chưa có bộ chọn nhiều ngôn
 
 ### 3.7. Cài đặt và bản bàn giao
 
-Máy kiểm thử dùng SQL Server `HIEUCOI\SQLEXPRESS`, Windows Authentication. `CHAY-WEB.cmd` kiểm tra/tạo database riêng nếu chưa có, build mã nguồn khi chưa có runtime cục bộ và mở `http://127.0.0.1:5080`; `TAT-WEB.cmd` dừng đúng tiến trình launcher quản lý. Cách chạy mã nguồn bằng SDK/cấu hình instance nằm trong [README](../README.md).
+Máy kiểm thử dùng SQL Server `HIEUCOI\\SQLEXPRESS`, Windows Authentication. Bản bàn giao khởi tạo database bằng cách mở `QuanLyKinhMat.sql` trong SSMS và nhấn F5; sau đó cấu hình kết nối trong `appsettings.json`, mở `WebQuanLyKinhMat.slnx` bằng Visual Studio hoặc chạy `dotnet run`. Website dùng địa chỉ `http://127.0.0.1:5080`. Các bước nằm trong [hướng dẫn cài đặt](../../CAI_DAT_VA_SU_DUNG.md).
 
-Khởi tạo dừng trước khi ghi nếu database web đã tồn tại; từng batch kiểm tra database đích và dấu session runner. `SqlDatabase` chỉ chấp nhận tên `QuanLyKinhMatWeb`. Release build đạt 0 lỗi/0 cảnh báo; bản publish/launcher và gói giải nén tại thư mục khác có khoảng trắng đã được chạy theo [verification.md](verification.md).
+Khởi tạo từ chối ghi đè database web đã tồn tại; từng batch kiểm tra database đích, dấu session khởi tạo và transaction. `SqlDatabase` chỉ chấp nhận tên `QuanLyKinhMatWeb`. Kết quả biên dịch và kiểm thử được ghi trong [verification.md](verification.md).
 
 ## 4. Kiểm thử và đánh giá
 
@@ -374,6 +374,6 @@ Kết quả đánh giá giới hạn ở dữ liệu mẫu và môi trường ki
 | Schema, dữ liệu và quy tắc khởi tạo | [Hướng dẫn database](database.md), [SQL](../../QuanLyKinhMat.sql) |
 | Ảnh chạy thực tế | `docs/screenshots/` |
 | Mã nguồn | [WebQuanLyKinhMat.csproj](../WebQuanLyKinhMat.csproj), `Controllers`, `Models`, `Data`, `Services`, `Views`, `wwwroot` |
-| Công cụ và bản chạy | `CHAY-WEB.cmd`, `TAT-WEB.cmd`, `scripts/` (biên dịch từ mã nguồn) |
+| Khởi chạy và kiểm thử | Visual Studio / `dotnet run`; công cụ kiểm thử trong `scripts/` |
 
 Cơ sở báo cáo gồm yêu cầu học phần, mã nguồn, schema SQL và các kết quả kiểm thử được lưu trong project.

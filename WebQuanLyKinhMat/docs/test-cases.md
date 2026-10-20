@@ -15,7 +15,7 @@ Danh sách dưới đây ghi kết quả chạy ngày 19/10/2026 bằng Microsof
 | ID | Mục tiêu / đầu vào và thao tác | Kết quả dự kiến | Đầu ra thực tế | Kết quả |
 |---|---|---|---|---|
 | DB01 | Khởi tạo khi chưa có `QuanLyKinhMatWeb`, server và quyền Windows hợp lệ. | Tạo DB riêng; 21 bảng gốc + WebUsers, view/ràng buộc/index đầy đủ; dữ liệu nghiệp vụ được import. | Database riêng đã tạo, 22 bảng; app kết nối thành công. | Đạt |
-| DB02 | Chạy khởi tạo lần nữa khi DB web đã tồn tại. | Dừng với thông báo DB tồn tại; không ghi đè dữ liệu và không tạo lại bảng. | Chạy lại runner: dừng với thông báo đã tồn tại; không ghi schema. | Đạt |
+| DB02 | Chạy khởi tạo lần nữa khi DB web đã tồn tại. | Dừng với thông báo DB tồn tại; không ghi đè dữ liệu và không tạo lại bảng. | Lượt trước: công cụ khởi tạo từ chối database đã có. Quy trình SQL trực tiếp được xác nhận riêng ngày 20/10/2026 trong startup-check.json. | Đạt |
 | DB03 | Kiểm tra `NhanVien.Passw`, `TaiKhoan.MatKhau/TrangThai` sau import. | Passw đều NULL; mật khẩu tài khoản cũ rỗng, tài khoản cũ không hoạt động. | Passw còn giá trị: 0; tài khoản cũ đang hoạt động/còn mật khẩu: 0. | Đạt |
 | DB04 | Khởi động lại sau khi xóa tài khoản demo. | Giữ 3 tài khoản mã nhân viên; không tạo lại demo hoặc reset mật khẩu. | Đã bỏ bootstrap; chỉ còn tài khoản 1/2/3, đăng nhập và quyền đúng ở bộ kiểm tra tài khoản mới. | Đạt |
 | DB05 | Chụp số dòng/SHA256 và cấu trúc DB gốc; chạy nhập/hủy và dọn QA ở web; đối chiếu lại. | `QuanLyKinhMat` không đổi trong vòng kiểm thử; ứng dụng chỉ ghi vào bản web riêng. | Cấu trúc, số dòng và SHA256 của toàn bộ 22 bảng trong DB gốc giống baseline trước/sau vòng nhập/hủy và cleanup. | Đạt |

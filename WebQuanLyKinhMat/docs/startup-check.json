@@ -1,0 +1,42 @@
+{
+  "clientDate": "2026-10-20",
+  "verifiedAt": "2026-10-20T08:29:27.7693895+07:00",
+  "method": "SQL batches on one connection, equivalent to SSMS F5",
+  "originalSchemaAndSeedPreserved": true,
+  "freshInstall": {
+    "passed": true,
+    "batches": 179,
+    "tables": 22,
+    "products": 8,
+    "webAccounts": 3,
+    "productImages": 8,
+    "transactionCommitted": true,
+    "sessionMarkerCleared": true
+  },
+  "existingDatabase": {
+    "refused": true,
+    "firstError": 51001,
+    "all22TablesUnchanged": true
+  },
+  "failedSetup": {
+    "deliberateError": 51009,
+    "schemaAndSeedRolledBack": true,
+    "transactionClosed": true
+  },
+  "liveDatabaseUnchanged": true,
+  "temporaryDatabasesRemoved": true,
+  "build": {
+    "configuration": "Release",
+    "errors": 0,
+    "warnings": 0
+  },
+  "dotnetRun": {
+    "command": "dotnet run",
+    "launchProfile": "WebQuanLyKinhMat",
+    "url": "http://127.0.0.1:5080",
+    "healthReady": true,
+    "adminLogin": true,
+    "productsRead": 8,
+    "allEightPhotosServed": true
+  }
+}

@@ -1,20 +1,26 @@
 # Cài đặt và sử dụng
 
-**Yêu cầu:** Windows, .NET 10 SDK và SQL Server. Nếu dùng Visual Studio, cài workload **ASP.NET and web development** và phiên bản hỗ trợ .NET 10, `.slnx`.
+**Yêu cầu:** Windows, .NET 10 SDK, SQL Server và SSMS. Nếu dùng Visual Studio, cần phiên bản hỗ trợ .NET 10, `.slnx` và workload **ASP.NET and web development**.
 
 ## 1. Khởi chạy dự án
 
-1. Tải và giải nén toàn bộ dự án, giữ nguyên cấu trúc thư mục.
-2. Mở `WebQuanLyKinhMat/appsettings.json`, sửa **`Server`** trong `ConnectionStrings.Store` theo tên máy chủ hiển thị ở SSMS. Giữ tên database `QuanLyKinhMatWeb` và dùng **Windows Authentication**. Ví dụ với SQL Express trên máy hiện tại:
+1. **Cơ sở dữ liệu:** Trong SSMS, kết nối SQL Server, mở `QuanLyKinhMat.sql` ở thư mục ngoài cùng và nhấn **F5** để tạo database `QuanLyKinhMatWeb` cùng dữ liệu mẫu. Chỉ thực hiện khi database chưa có; tài khoản kết nối cần quyền tạo database.
+2. **Kết nối:** Mở `WebQuanLyKinhMat/appsettings.json`, sửa `Server` trong `ConnectionStrings.Store` theo tên máy chủ ở SSMS; giữ tên database và dùng **Windows Authentication**. Ví dụ:
 
    ```json
    "Store": "Server=HIEUCOI\\SQLEXPRESS;Database=QuanLyKinhMatWeb;Integrated Security=True;TrustServerCertificate=True;Connect Timeout=10"
    ```
 
-3. Mở thư mục `WebQuanLyKinhMat` bên trong, nhấp đúp **`CHAY-WEB.cmd`**. Chương trình tự tạo database và dữ liệu mẫu từ `QuanLyKinhMat.sql` nếu chưa có, sau đó biên dịch và mở website. Lần đầu cần mạng để tải thư viện và tài khoản Windows có quyền tạo database.
-4. Truy cập **[http://127.0.0.1:5080](http://127.0.0.1:5080)**. Dừng chương trình bằng **`TAT-WEB.cmd`**.
+3. **Chạy ứng dụng:** Mở `WebQuanLyKinhMat.slnx` ở thư mục ngoài cùng bằng Visual Studio, chọn project **WebQuanLyKinhMat** rồi nhấn **F5** hoặc **Ctrl + F5**.
 
-**Chạy bằng Visual Studio:** Sau lần khởi chạy đầu, dùng `TAT-WEB.cmd` để dừng web, mở **`WebQuanLyKinhMat.slnx`** ở thư mục ngoài cùng rồi nhấn **F5** hoặc **Ctrl + F5**.
+   Hoặc mở terminal tại thư mục ngoài cùng và chạy:
+
+   ```powershell
+   cd WebQuanLyKinhMat
+   dotnet run
+   ```
+
+4. Mở **[http://127.0.0.1:5080](http://127.0.0.1:5080)**. Dừng bằng **Shift + F5** khi debug, hoặc **Ctrl + C** tại cửa sổ console/terminal.
 
 ## 2. Đăng nhập
 
@@ -23,4 +29,4 @@
 | `1` | `hieucoi12345` | Quản lý |
 | `2`, `3` | `hieucoi12345` | Nhân viên |
 
-Tài khoản trên dùng để đăng nhập website. Nếu đã đổi mật khẩu, sử dụng mật khẩu mới. Chức năng và kết quả kiểm thử xem tại [README](README.md).
+Nếu đã đổi mật khẩu, sử dụng mật khẩu mới. Các chức năng và kết quả kiểm thử xem tại [README](README.md).

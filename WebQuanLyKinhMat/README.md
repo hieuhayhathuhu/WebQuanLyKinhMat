@@ -11,4 +11,4 @@ Project ASP.NET Core MVC, target `net10.0`, kết nối SQL Server qua `Microsof
 
 Mở [WebQuanLyKinhMat.slnx](../WebQuanLyKinhMat.slnx) tại thư mục ngoài cùng. File SQL đi kèm nằm tại [QuanLyKinhMat.sql](../QuanLyKinhMat.sql); cần giữ nguyên vị trí tương đối này khi sao chép project.
 
-Chạy nhanh bằng `CHAY-WEB.cmd`; dừng bằng `TAT-WEB.cmd`. Thực hiện cấu hình và chuẩn bị database theo hướng dẫn cài đặt trước khi chạy trong Visual Studio.
+Chạy file SQL trong SSMS và cấu hình kết nối theo hướng dẫn cài đặt, sau đó mở solution bằng Visual Studio và nhấn F5. Có thể dùng `dotnet run` tại thư mục chứa `.csproj`.
